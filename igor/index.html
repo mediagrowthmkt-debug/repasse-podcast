@@ -798,7 +798,10 @@ async function initLoad(){
     try{ const r=await fetch(API_BASE+"?action=get&slug="+encodeURIComponent((D.convidado||{}).slug||""),{cache:"no-store"}); const s=await r.json(); if(s && s.painel){ D=Object.assign({},D,s.painel); } }catch(e){}
   }
   render();
-  if(!EDIT){ setInterval(live,30000); }                      // no modo cliente atualiza sozinho; no modo edição NÃO (não atropela a edição)
+  // PÁGINA ESTÁTICA (Bruno 25-07): sem auto-refresh. Antes um setInterval(live,30000) re-renderizava
+  // o DOM inteiro e RESETAVA o vídeo em play (loop de reinício). Os dados são carregados 1x ao abrir
+  // (acima) e a página fica parada. Números novos aparecem quando o convidado recarrega a página.
+  // 🚫 NUNCA reintroduzir setInterval/reload que chame render() no modo cliente.
 }
 render(); initLoad();
 </script>
