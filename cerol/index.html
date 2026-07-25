@@ -172,6 +172,8 @@
   .cortes-note{padding:16px 18px 0;font-size:13px;color:#3f566d;line-height:1.5}
   .cortes-note b{color:var(--navy)}
   .cortes-note a{font-weight:700}
+  /* protecao anti-download: cliente da play, nao baixa (controlsList=nodownload no <video> + hotlink .htaccess) */
+  video{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
   .corte .cedit{margin-top:9px;width:100%;font-size:12px;font-weight:700;border:1px dashed #b9c6d6;background:#fff;color:var(--blue);border-radius:9px;padding:7px;cursor:pointer}
   .corte .cedit:hover{background:var(--soft)}
   .camp-wait{background:#fff8ec;border:1px solid #ffe6b8;border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:#6a4a00;line-height:1.5}
@@ -490,7 +492,7 @@ function posterOf(c){
 }
 function corteMediaHTML(c){
   if(c.link){ const u=c.link.endsWith('/')?c.link:c.link+'/'; return `<blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}" data-instgrm-version="14" style="margin:0;width:100%;min-width:0;border:0"></blockquote>`; }
-  if(c.video) return `<video class="mvid" playsinline controls poster="${esc(c.poster||'')}"><source src="${esc(c.video)}"></video>`;
+  if(c.video) return `<video class="mvid" playsinline controls controlsList="nodownload noremoteplayback" disablePictureInPicture disableRemotePlayback oncontextmenu="return false" draggable="false" poster="${esc(c.poster||'')}"><source src="${esc(c.video)}"></video>`;
   if(c.poster) return `<img class="mvid" src="${esc(c.poster)}">`;
   return `<div class="mvid" style="display:flex;align-items:center;justify-content:center;color:#7d93a8;font-size:13px;text-align:center;padding:10px">Envie um vídeo ou cole um link do Instagram e toque em "Usar este link"</div>`;
 }
@@ -637,7 +639,10 @@ function renderCortes(){
   }).join("") + (EDIT?`<div class="corte addcard" onclick="addCorte()"><div class="addinner"><span>➕</span>Adicionar corte</div></div>`:"");
 }
 function playCorte(btn){ const box=btn.closest('.corte'); const v=box&&box.querySelector('video'); if(!v)return; v.setAttribute('controls','controls'); v.muted=false; box.classList.add('playing'); const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{ v.muted=true; v.play(); }); }
-function playVideoInline(btn,url){ const t=btn.closest('.thumb'); if(!t)return; t.innerHTML=`<video src="${url}" autoplay controls playsinline preload="auto" style="width:100%;height:100%;object-fit:cover"></video>`; }
+function playVideoInline(btn,url){ const t=btn.closest('.thumb'); if(!t)return; t.innerHTML=`<video src="${url}" autoplay controls controlsList="nodownload noremoteplayback" disablePictureInPicture disableRemotePlayback oncontextmenu="return false" draggable="false" playsinline preload="auto" style="width:100%;height:100%;object-fit:cover"></video>`; }
+/* backstop anti-download: bloqueia menu de contexto e arrastar SO em <video> (nao afeta o drag do calendario) */
+document.addEventListener("contextmenu",function(e){ if(e.target&&e.target.closest&&e.target.closest("video")) e.preventDefault(); },true);
+document.addEventListener("dragstart",function(e){ if(e.target&&e.target.closest&&e.target.closest("video")) e.preventDefault(); },true);
 function editCorte(id){
   const c=(D.cortes||[]).find(x=>x.id===id); if(!c)return;
   const nome=c.titulo||("corte "+(c.semana||""));
