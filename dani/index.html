@@ -8,6 +8,8 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Dani · Acompanhamento · Repasse Podcast</title>
+<!-- hls.js: toca os cortes BLINDADOS (HLS + AES-128 com chave tokenizada). CDN jsDelivr (pode ser auto-hospedado). -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
 <style>
   :root{
     --navy:#012D5A; --navy2:#002038; --red:#FE3231; --blue:#01509D;
@@ -100,6 +102,12 @@
   .mclose{position:absolute;top:10px;right:12px;border:0;background:#eef2f7;width:28px;height:28px;border-radius:50%;font-weight:800;cursor:pointer;color:#5b6b7d}
   .mtag{display:inline-block;color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:999px}
   .mvid{width:100%;border-radius:12px;margin:6px 0 12px;background:#000;max-height:60vh;aspect-ratio:9/16;object-fit:cover;display:block}
+  .securehost{position:relative;overflow:hidden;border-radius:12px}
+  .securehost video{border-radius:12px}
+  /* marca d'água rastreável (deterrente): flutua por cima do vídeo e reposiciona sozinha */
+  .secure-wm{position:absolute;z-index:3;pointer-events:none;user-select:none;font-weight:800;
+    font-size:12px;letter-spacing:.5px;color:rgba(255,255,255,.30);text-shadow:0 1px 3px rgba(0,0,0,.5);
+    transform:rotate(-18deg);transition:left .8s ease,top .8s ease;white-space:nowrap}
   .mbtn{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;background:var(--red);color:#fff;font-weight:800;font-size:13px;padding:11px;border-radius:10px;text-decoration:none;border:0;width:100%;cursor:pointer}
   .mbtn.edit{background:#fff;color:var(--blue);border:1px dashed #b9c6d6}
   /* aviso de salvamento automático */
@@ -319,7 +327,7 @@
   <div id="saveStatus" class="savest"></div>
 
 <script>
-const PAINEL = {"schema": 1, "cliente": "Repasse Podcast", "convidado": {"slug": "dani", "nome": "Dani", "empresa": "", "cargo": "", "foto": "", "episodio": "", "gravado_em": "", "instagram": "https://www.instagram.com/eudanirepassefloripa/"}, "brand": {"navy": "#012D5A", "red": "#FE3231", "blue": "#01509D"}, "logo": "assets/logo.png", "episodio_youtube": "YBAcoHafd-k", "patrocinio": {"inicio": "2026-07-20", "fim": "2026-08-16", "total_posts": 4, "resumo": "5 cortes do seu episodio publicados aos poucos + 1 campanha de trafego pago levando pessoas ate o seu Instagram."}, "plano_intro": "Aqui voce acompanha, em tempo real, tudo o que a MediaGrowth esta fazendo com o seu episodio: quando cada corte sobe, o que ja publicou e como esta a campanha que leva o seu conteudo aos lojistas do nicho automotivo.", "plano": [{"icone": "🎬", "titulo": "5 cortes do episodio", "desc": "Os melhores momentos, publicados aos poucos nas redes do Repasse Podcast."}, {"icone": "🚀", "titulo": "Trafego pro seu Instagram", "desc": "Impulsionamento pago levando pessoas do publico certo ate o seu perfil."}, {"icone": "🔁", "titulo": "Troca semanal", "desc": "A cada domingo a campanha passa a impulsionar o proximo corte, dando fôlego novo a cada semana."}, {"icone": "📊", "titulo": "Numeros ao vivo", "desc": "Cliques, visitas ao perfil e alcance da campanha sempre atualizados nesta pagina."}], "cortes": [{"id": "01", "semana": 1, "titulo": "Corte 1", "turbinado": true, "status": "no_ar", "sobe_em": "2026-07-20", "video": "https://mediagrowth.com.br/cortes/repasse-dani/videos/dani-corte-01-web.mp4", "poster": "assets/poster-01.jpg", "link": "", "pago_ini": "2026-07-20", "pago_fim": "2026-07-26"}, {"id": "02", "semana": 2, "titulo": "Corte 2", "turbinado": false, "status": "agendado", "sobe_em": "2026-07-27", "video": "https://mediagrowth.com.br/cortes/repasse-dani/videos/dani-corte-02-web.mp4", "poster": "assets/poster-02.jpg", "link": "", "pago_ini": "2026-07-27", "pago_fim": "2026-08-02"}, {"id": "03", "semana": 3, "titulo": "Corte 3", "turbinado": false, "status": "agendado", "sobe_em": "2026-08-03", "video": "https://mediagrowth.com.br/cortes/repasse-dani/videos/dani-corte-03-web.mp4", "poster": "assets/poster-03.jpg", "link": "", "pago_ini": "2026-08-03", "pago_fim": "2026-08-09"}, {"id": "04", "semana": 4, "titulo": "Corte 4", "turbinado": false, "status": "agendado", "sobe_em": "2026-08-10", "video": "https://mediagrowth.com.br/cortes/repasse-dani/videos/dani-corte-04-web.mp4", "poster": "assets/poster-04.jpg", "link": "", "pago_ini": "2026-08-10", "pago_fim": "2026-08-16"}, {"id": "05", "semana": 5, "titulo": "Corte 5", "turbinado": false, "status": "agendado", "sobe_em": "2026-08-15", "video": "https://mediagrowth.com.br/cortes/repasse-dani/videos/dani-corte-05-web.mp4", "poster": "assets/poster-05.jpg", "link": ""}], "organicos": [], "notas": {"2026-07-26": "Troca do impulsionamento: Corte 1 -> Corte 2 (domingo)"}, "campanha": {"status": "ativa", "conta": "Repasse Podcast Ads", "account_id": "act_1275229611165039", "campaign_id": "120245479490130582", "campanha_nome": "20-07-26 - Reconhecimento - Reel Dani Repasse Floripa", "objetivo": "Levar pessoas do publico certo ate o Instagram do convidado (trafego / cliques no link)", "publico": "Lojistas e repassadores de veiculos (donos de loja de carro, do pequeno ao premium)", "regiao": "Grande Florianopolis / SC", "periodo": "", "gasto": null, "impressoes": null, "alcance": null, "link_clicks": null, "perfil": null, "views": null, "cliques": null, "ctr": null, "agenda": [], "anuncios": [{"nome": "Reel Dani Repasse Floripa", "ig": "https://www.instagram.com/p/DbBwq4ygIWN/"}]}, "atualizado_em": "2026-07-24"};
+const PAINEL = {"schema": 1, "cliente": "Repasse Podcast", "convidado": {"slug": "dani", "nome": "Dani", "empresa": "", "cargo": "", "foto": "", "episodio": "", "gravado_em": "", "instagram": "https://www.instagram.com/eudanirepassefloripa/"}, "brand": {"navy": "#012D5A", "red": "#FE3231", "blue": "#01509D"}, "logo": "assets/logo.png", "episodio_youtube": "YBAcoHafd-k", "patrocinio": {"inicio": "2026-07-20", "fim": "2026-08-16", "total_posts": 4, "resumo": "5 cortes do seu episodio publicados aos poucos + 1 campanha de trafego pago levando pessoas ate o seu Instagram."}, "plano_intro": "Aqui voce acompanha, em tempo real, tudo o que a MediaGrowth esta fazendo com o seu episodio: quando cada corte sobe, o que ja publicou e como esta a campanha que leva o seu conteudo aos lojistas do nicho automotivo.", "plano": [{"icone": "🎬", "titulo": "5 cortes do episodio", "desc": "Os melhores momentos, publicados aos poucos nas redes do Repasse Podcast."}, {"icone": "🚀", "titulo": "Trafego pro seu Instagram", "desc": "Impulsionamento pago levando pessoas do publico certo ate o seu perfil."}, {"icone": "🔁", "titulo": "Troca semanal", "desc": "A cada domingo a campanha passa a impulsionar o proximo corte, dando fôlego novo a cada semana."}, {"icone": "📊", "titulo": "Numeros ao vivo", "desc": "Cliques, visitas ao perfil e alcance da campanha sempre atualizados nesta pagina."}], "cortes": [{"id": "01", "semana": 1, "titulo": "Corte 1", "turbinado": true, "status": "no_ar", "video": "https://mediagrowth.com.br/cortes/repasse-dani/videos/dani-corte-01-web.mp4", "link": "https://www.instagram.com/p/DaFu5tju4nS/", "pago_ini": "2026-07-24", "pago_fim": "2026-08-30", "poster": "https://mediagrowth.com.br/cortes/repasse-dani/posters/ig-DaFu5tju4nS.jpg", "tipo": "pago"}, {"id": "02", "semana": 2, "titulo": "Corte 2", "turbinado": false, "status": "agendado", "sobe_em": "2026-07-24", "poster": "assets/poster-02.jpg", "link": "", "pago_ini": "2026-08-03", "pago_fim": "2026-08-03", "hls": "https://mediagrowth.com.br/cortes/repasse-dani/hls/dani-corte-02/index.m3u8"}, {"id": "03", "semana": 3, "titulo": "Corte 3", "turbinado": false, "status": "agendado", "sobe_em": "2026-07-25", "poster": "assets/poster-03.jpg", "link": "", "pago_ini": "2026-08-10", "pago_fim": "2026-08-10", "hls": "https://mediagrowth.com.br/cortes/repasse-dani/hls/dani-corte-03/index.m3u8"}, {"id": "04", "semana": 4, "titulo": "Corte 4", "turbinado": false, "status": "agendado", "sobe_em": "2026-07-26", "poster": "assets/poster-04.jpg", "link": "", "pago_ini": "2026-08-17", "pago_fim": "2026-08-17", "hls": "https://mediagrowth.com.br/cortes/repasse-dani/hls/dani-corte-04/index.m3u8"}, {"id": "05", "semana": 5, "titulo": "Corte 5", "turbinado": false, "status": "agendado", "poster": "assets/poster-05.jpg", "link": "", "tipo": "pago", "pago_ini": "2026-08-24", "pago_fim": "2026-08-31", "hls": "https://mediagrowth.com.br/cortes/repasse-dani/hls/dani-corte-05/index.m3u8"}], "organicos": [], "notas": {"2026-07-26": "Troca do impulsionamento: Corte 1 -> Corte 2 (domingo)"}, "campanha": {"status": "ativa", "conta": "Repasse Podcast Ads", "account_id": "act_1275229611165039", "campaign_id": "120245479490130582", "campanha_nome": "24-07-26 - Reconhecimento - Reel Dani Repasse Floripa", "objetivo": "Levar pessoas do publico certo ate o Instagram do convidado (trafego / cliques no link)", "publico": "Lojistas e repassadores de veiculos (donos de loja de carro, do pequeno ao premium)", "regiao": "Grande Florianopolis / SC", "periodo": "2026-07-20 a 2026-07-25", "gasto": 42.42, "impressoes": 3330, "alcance": 2771, "link_clicks": 219, "perfil": 142, "views": 1361, "cliques": 239, "ctr": 7.18, "agenda": [], "anuncios": [{"nome": "Reel Dani Repasse Floripa", "ig": "https://www.instagram.com/p/DbBwq4ygIWN/", "gasto": 42.42, "link_clicks": 219, "perfil": 142}]}, "atualizado_em": "2026-07-25"};
 const API_BASE = "https://mediagrowth.com.br/paineis-api/api.php";
 const MESES=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
 const DOW=["dom","seg","ter","qua","qui","sex","sáb"];
@@ -492,6 +500,9 @@ function posterOf(c){
 }
 function corteMediaHTML(c){
   if(c.link){ const u=c.link.endsWith('/')?c.link:c.link+'/'; return `<blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}" data-instgrm-version="14" style="margin:0;width:100%;min-width:0;border:0"></blockquote>`; }
+  // BLINDADO: corte HLS+AES (chave tokenizada). Monta o player seguro após inserir no DOM.
+  if(c.hls) return `<div class="mvid securehost" data-hls="${esc(c.hls)}" data-poster="${esc(c.poster||'')}" data-mark="${esc(secureMark())}"></div>`;
+  // LEGADO: .mp4 cru (painéis antigos ainda não migrados) — segue tocando (compat).
   if(c.video) return `<video class="mvid" playsinline controls controlsList="nodownload noremoteplayback" disablePictureInPicture disableRemotePlayback oncontextmenu="return false" draggable="false" poster="${esc(c.poster||'')}"><source src="${esc(c.video)}"></video>`;
   if(c.poster) return `<img class="mvid" src="${esc(c.poster)}">`;
   return `<div class="mvid" style="display:flex;align-items:center;justify-content:center;color:#7d93a8;font-size:13px;text-align:center;padding:10px">Envie um vídeo ou cole um link do Instagram e toque em "Usar este link"</div>`;
@@ -588,10 +599,10 @@ function openPopup(kind,cid){
     tag=`<div class="mtag" style="background:var(--org)">Corte · publicação orgânica</div>`;
     info=`<p>🟢 <b>Sobe (orgânico):</b> ${c.sobe_em?fmtBR(c.sobe_em):"a definir"}<br>📌 <b>Status:</b> ${stL}${c.pago_ini?`<br>🔵 <b>Impulsionado:</b> ${fmtBR(c.pago_ini)} a ${fmtBR(c.pago_fim)}`:""}</p>`;
   }
-  body.innerHTML=`${tag}<h3>${esc(corteTit(c))}</h3>${media}${info}`; box.style.display="flex"; igProcess();
+  body.innerHTML=`${tag}<h3>${esc(corteTit(c))}</h3>${media}${info}`; box.style.display="flex"; igProcess(); mountAllSecure(body);
 }
-function closePopup(){ const b=$("modal"); if(b) b.style.display="none"; const v=document.querySelector('#modalBody video'); if(v){try{v.pause();}catch(e){}} }
-function openReel(cid){ const c=(D.cortes||[]).find(x=>x.id===cid); if(!c)return; const b=$("modalBody"); if(!b)return; b.innerHTML=`<div class="mtag" style="background:var(--navy)">${esc(corteTit(c))}</div>${corteMediaHTML(c)}`; $("modal").style.display="flex"; igProcess(); }
+function closePopup(){ const b=$("modal"); if(b) b.style.display="none"; const v=document.querySelector('#modalBody video'); if(v){try{v.pause();}catch(e){}} const h=document.querySelector('#modalBody .securehost'); if(h&&h._hls){try{h._hls.destroy();}catch(e){}} if(h&&h._wmTimer){clearInterval(h._wmTimer);} }
+function openReel(cid){ const c=(D.cortes||[]).find(x=>x.id===cid); if(!c)return; const b=$("modalBody"); if(!b)return; b.innerHTML=`<div class="mtag" style="background:var(--navy)">${esc(corteTit(c))}</div>${corteMediaHTML(c)}`; $("modal").style.display="flex"; igProcess(); mountAllSecure(b); }
 async function backfillPosters(){
   if(!EDIT || !TOKEN) return; let changed=false;
   for(const c of (D.cortes||[])){
@@ -624,11 +635,12 @@ function renderCortes(){
     // grade sempre mostra CAPA leve (imagem); vídeo só carrega no play (não trava a página)
     const media=isLink
       ? `<img src="${esc(posterOf(c))}" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.opacity=0">`
-      : ((c.poster||c.video)?`<img src="${esc(c.poster||'')}" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.opacity=0">`
+      : ((c.poster||c.video||c.hls)?`<img src="${esc(c.poster||'')}" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.opacity=0">`
         :`<div class="thlink">sem vídeo</div>`);
+    const playSrc=c.hls||c.video;   // blindado (HLS) tem prioridade; .mp4 cru só no legado
     const play=isLink
       ? `<button class="playbtn" onclick="openReel('${esc(c.id)}')" aria-label="Ver o reel">▶</button>`
-      : (c.video?`<button class="playbtn" onclick="playVideoInline(this,'${esc(c.video)}')" aria-label="Tocar o corte">▶</button>`:"");
+      : (playSrc?`<button class="playbtn" onclick="playVideoInline(this,'${esc(playSrc)}')" aria-label="Tocar o corte">▶</button>`:"");
     const org=(tp!=="pago")?(c.sobe_em?("🟢 Orgânico: "+fmtBR(c.sobe_em)):"🟢 Orgânico: a definir"):"";
     const sep=(org&&tp==="ambos"&&c.pago_ini)?" · ":"";
     const pago=(tp!=="organico"&&c.pago_ini)?(sep+"🔵 Anúncio: "+fmtBR(c.pago_ini)+"–"+fmtBR(c.pago_fim)):"";
@@ -639,7 +651,86 @@ function renderCortes(){
   }).join("") + (EDIT?`<div class="corte addcard" onclick="addCorte()"><div class="addinner"><span>➕</span>Adicionar corte</div></div>`:"");
 }
 function playCorte(btn){ const box=btn.closest('.corte'); const v=box&&box.querySelector('video'); if(!v)return; v.setAttribute('controls','controls'); v.muted=false; box.classList.add('playing'); const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{ v.muted=true; v.play(); }); }
-function playVideoInline(btn,url){ const t=btn.closest('.thumb'); if(!t)return; t.innerHTML=`<video src="${url}" autoplay controls controlsList="nodownload noremoteplayback" disablePictureInPicture disableRemotePlayback oncontextmenu="return false" draggable="false" playsinline preload="auto" style="width:100%;height:100%;object-fit:cover"></video>`; }
+/* ============================ PLAYER SEGURO (HLS + AES-128 tokenizado) ============================
+   O corte blindado tem cortes[].hls (playlist .m3u8). Os .ts são criptografados; a chave só sai
+   pelo key.php com token curto (HMAC) que o sign.php emite. hls.js intercepta a request da KEY e
+   injeta ?token=&expires=. yt-dlp/curl sem esse token levam 403 -> não decriptam -> não baixam.
+   Fallback nativo pro Safari (toca HLS direto) e pro .mp4 cru legado. */
+const SIGN_BASE = (function(){ try{ return API_BASE.replace(/\/api\.php.*$/,'') + '/sign.php'; }catch(e){ return 'sign.php'; } })();
+function secureMark(){ /* marca d'água rastreável: slug do painel */ return ((D.convidado||{}).slug)||"repasse"; }
+async function _signToken(vid){
+  const r=await fetch(SIGN_BASE+'?v='+encodeURIComponent(vid),{credentials:'omit',cache:'no-store'});
+  if(!r.ok) throw new Error('sign '+r.status);
+  return r.json();  // {token, expires}
+}
+/* injeta token+expires em TODA request de KEY (URI do key.php dentro do .m3u8) */
+function _hlsConfig(vid){
+  return {
+    maxBufferLength:20, enableWorker:true, lowLatencyMode:false,
+    xhrSetup:function(xhr,url){ /* nada global */ },
+    // hls.js chama loader p/ a KEY; usamos um loader custom que assina antes
+  };
+}
+function _attachWatermark(host,label){
+  const wm=document.createElement('div'); wm.className='secure-wm'; wm.textContent=label;
+  host.appendChild(wm);
+  function move(){ wm.style.left=(6+Math.random()*60)+'%'; wm.style.top=(8+Math.random()*74)+'%'; }
+  move(); host._wmTimer=setInterval(move,4000);
+}
+function mountSecurePlayer(host){
+  if(!host||host._mounted) return; host._mounted=true;
+  const src=host.getAttribute('data-hls'); const poster=host.getAttribute('data-poster')||'';
+  const mark=host.getAttribute('data-mark')||secureMark();
+  const vid=(src.match(/\/hls\/([^\/]+)\//)||[])[1]||'corte';
+  const v=document.createElement('video');
+  v.setAttribute('playsinline',''); v.controls=true; v.poster=poster;
+  v.setAttribute('controlsList','nodownload noremoteplayback');
+  v.setAttribute('disablePictureInPicture',''); v.setAttribute('disableRemotePlayback','');
+  v.oncontextmenu=()=>false; v.draggable=false;
+  v.style.cssText='width:100%;height:100%;object-fit:cover;background:#000;position:relative;z-index:0';
+  host.style.position='relative'; host.innerHTML=''; host.appendChild(v);
+  _attachWatermark(host,mark);
+  const useHls = window.Hls && Hls.isSupported();
+  if(useHls){
+    // Loader custom que assina o token antes de buscar a KEY e injeta na URL.
+    let cached=null;
+    class SignedLoader extends Hls.DefaultConfig.loader{
+      load(ctx,cfg,cbs){
+        const isKey = /\/key\.php\b/.test(ctx.url) || (ctx.type==='key');
+        if(isKey){
+          const go=(tk)=>{ const sep=ctx.url.includes('?')?'&':'?'; ctx.url=ctx.url+sep+'token='+encodeURIComponent(tk.token)+'&expires='+tk.expires; super.load(ctx,cfg,cbs); };
+          const now=Math.floor(Date.now()/1000);
+          if(cached && cached.expires-5>now){ go(cached); }
+          else{ _signToken(vid).then(tk=>{ cached=tk; go(tk); }).catch(e=>{ if(cbs.onError)cbs.onError({code:0,text:'sign fail'},ctx,null); }); }
+          return;
+        }
+        super.load(ctx,cfg,cbs);
+      }
+    }
+    const hls=new Hls(Object.assign(_hlsConfig(vid),{loader:SignedLoader}));
+    host._hls=hls;
+    hls.loadSource(src); hls.attachMedia(v);
+    hls.on(Hls.Events.MANIFEST_PARSED,()=>{ const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{ v.muted=true; v.play&&v.play(); }); });
+    hls.on(Hls.Events.ERROR,(_,data)=>{ if(data&&data.fatal){ try{hls.destroy();}catch(e){} } });
+  } else {
+    // Safari/iOS: HLS nativo (a KEY não passa pelo hls.js). Pedimos a playlist ao play.php,
+    // que devolve o .m3u8 com o URI da KEY já carregando um token curto -> AVPlayer decripta.
+    const slug=(D.convidado||{}).slug||'';
+    const playUrl=SIGN_BASE.replace(/sign\.php.*$/,'play.php')+'?slug='+encodeURIComponent(slug)+'&v='+encodeURIComponent(vid);
+    v.src=playUrl;
+    const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{ v.muted=true; v.play&&v.play(); });
+  }
+}
+function mountAllSecure(root){ (root||document).querySelectorAll('.securehost:not([data-done])').forEach(h=>{ h.setAttribute('data-done','1'); mountSecurePlayer(h); }); }
+function playVideoInline(btn,url){
+  const t=btn.closest('.thumb'); if(!t)return;
+  if(/\.m3u8(\?|$)/.test(url)){ /* corte blindado */
+    t.innerHTML=`<div class="securehost" data-hls="${esc(url)}" data-mark="${esc(secureMark())}" style="width:100%;height:100%"></div>`;
+    mountAllSecure(t); return;
+  }
+  /* legado .mp4 cru */
+  t.innerHTML=`<video src="${url}" autoplay controls controlsList="nodownload noremoteplayback" disablePictureInPicture disableRemotePlayback oncontextmenu="return false" draggable="false" playsinline preload="auto" style="width:100%;height:100%;object-fit:cover"></video>`;
+}
 /* backstop anti-download: bloqueia menu de contexto e arrastar SO em <video> (nao afeta o drag do calendario) */
 document.addEventListener("contextmenu",function(e){ if(e.target&&e.target.closest&&e.target.closest("video")) e.preventDefault(); },true);
 document.addEventListener("dragstart",function(e){ if(e.target&&e.target.closest&&e.target.closest("video")) e.preventDefault(); },true);
