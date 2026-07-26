@@ -399,7 +399,7 @@ function renderEditbar(){
 }
 
 /* ---- eventos por dia (cortes/organicos/impulsionamento) ---- */
-function corteTit(c){ return c.titulo||("Corte "+(c.semana||"")); }
+function corteTit(c){ return "Corte "+(c.semana||((D.cortes||[]).indexOf(c)+1)||""); } /* nunca usa nome/titulo do corte (regra Bruno) */
 function isoOf(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function dateRange(a,b){ const out=[]; let d=dpar(a),e=dpar(b); if(!d||!e)return out; if(e<d){const t=d;d=e;e=t;} let cur=new Date(d),g=0; while(cur<=e && g++<400){ out.push(isoOf(cur)); cur.setDate(cur.getDate()+1);} return out; }
 function calSegments(){
@@ -536,8 +536,7 @@ function renderCorteAdmin(){
   const c=(D.cortes||[]).find(x=>x.id===admin.cid); const body=$("modalBody"); if(!c||!body){ closePopup(); return; }
   const media=corteMediaHTML(c);
   const t=admin.tipo;
-  let h=`<div class="mtag" style="background:var(--navy)">⚙️ Gerenciar corte</div>
-    <input class="adm-inp adm-nome" value="${esc(c.titulo||('Corte '+(c.semana||'')))}" oninput="adminNome(this.value)" placeholder="Nome do corte">
+  let h=`<div class="mtag" style="background:var(--navy)">⚙️ Gerenciar ${esc(corteTit(c))}</div>
     ${media}
     <div class="adm-lbl">Este corte vai para:</div>
     <div class="seg"><button type="button" class="${t==='organico'?'on':''}" onclick="adminTipo('organico')">🟢 Orgânico</button>
@@ -578,7 +577,7 @@ async function adminVideo(inp){ const f=inp.files&&inp.files[0]; if(!f)return; i
     scheduleSave(); renderCorteAdmin(); renderCal(); renderCortes();
     alert('Vídeo enviado! Já aparece na grade e no calendário.' + (f.size>10*1024*1024 ? '\n\nComo é um vídeo pesado, ele será otimizado automaticamente (fica leve e rápido) nos próximos minutos.' : ''));
   }catch(e){ alert('Erro: '+(e.message||e)); } finally{ if(txt) txt.nodeValue=old; } }
-function adminDel(){ const c=(D.cortes||[]).find(x=>x.id===admin.cid); if(!c)return; if(!confirm('Excluir '+(c.titulo||'este corte')+'?'))return; D.cortes=(D.cortes||[]).filter(x=>x.id!==admin.cid); closePopup(); renderCal(); renderCortes(); renderTL(); scheduleSave(); }
+function adminDel(){ const c=(D.cortes||[]).find(x=>x.id===admin.cid); if(!c)return; if(!confirm('Excluir '+corteTit(c)+'?'))return; D.cortes=(D.cortes||[]).filter(x=>x.id!==admin.cid); closePopup(); renderCal(); renderCortes(); renderTL(); scheduleSave(); }
 function adminDone(){ closePopup(); renderCal(); renderCortes(); renderTL(); scheduleSave(); }
 
 function openPopup(kind,cid){
@@ -646,7 +645,7 @@ function renderCortes(){
     const pago=(tp!=="organico"&&c.pago_ini)?(sep+"🔵 Anúncio: "+fmtBR(c.pago_ini)+"–"+fmtBR(c.pago_fim)):"";
     const edit=EDIT?`<button class="cedit" onclick="openCorteAdmin('${esc(c.id)}')">⚙️ Gerenciar corte</button>`:"";
     return `<div class="corte"><div class="thumb">${media}${play}<span class="wk">Semana ${esc(c.semana||"?")}</span>${isLink?'<span class="turbo" style="background:var(--blue)">🔗 Instagram</span>':''}</div>
-      <div class="meta"><b>${esc(c.titulo||("Corte "+(c.semana||"")))}</b><span class="pill ${st}">${stL}</span>
+      <div class="meta"><b>${esc(corteTit(c))}</b><span class="pill ${st}">${stL}</span>
       <div class="when">${org}${pago||(!org?'sem data':'')}</div>${edit}</div></div>`;
   }).join("") + (EDIT?`<div class="corte addcard" onclick="addCorte()"><div class="addinner"><span>➕</span>Adicionar corte</div></div>`:"");
 }
@@ -720,7 +719,7 @@ document.addEventListener("contextmenu",function(e){ if(e.target&&e.target.close
 document.addEventListener("dragstart",function(e){ if(e.target&&e.target.closest&&e.target.closest("video")) e.preventDefault(); },true);
 function editCorte(id){
   const c=(D.cortes||[]).find(x=>x.id===id); if(!c)return;
-  const nome=c.titulo||("corte "+(c.semana||""));
+  const nome=corteTit(c);
   const org=prompt("Publicação ORGÂNICA do "+nome+" — data (AAAA-MM-DD):", c.sobe_em||"");
   if(org===null) return;
   const pi=prompt("ANÚNCIO (impulsionamento) — INÍCIO (AAAA-MM-DD, vazio se não houver):", c.pago_ini||"");
@@ -820,7 +819,7 @@ function renderTL(){
   const today=new Date(); today.setHours(0,0,0,0);
   const items=[];
   (D.cortes||[]).forEach(c=>{
-    const nome=c.titulo||("Corte "+(c.semana||""));
+    const nome=corteTit(c);
     if(c.sobe_em) items.push({data:c.sobe_em,cls:"org",b:"Orgânico",t:nome,done:(c.status==="publicado")});
     if(c.pago_ini) items.push({data:c.pago_ini,cls:"pago",b:"Pago",t:"Impulsionar "+nome+" (até "+fmtBR(c.pago_fim)+")",done:false});
   });
