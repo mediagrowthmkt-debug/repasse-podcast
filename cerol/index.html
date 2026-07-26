@@ -690,35 +690,19 @@ function mountSecurePlayer(host){
   v.style.cssText='width:100%;height:100%;object-fit:cover;background:#000;position:relative;z-index:0';
   host.style.position='relative'; host.innerHTML=''; host.appendChild(v);
   _attachWatermark(host,mark);
-  const useHls = window.Hls && Hls.isSupported();
-  if(useHls){
-    // Loader custom que assina o token antes de buscar a KEY e injeta na URL.
-    let cached=null;
-    class SignedLoader extends Hls.DefaultConfig.loader{
-      load(ctx,cfg,cbs){
-        const isKey = /\/key\.php\b/.test(ctx.url) || (ctx.type==='key');
-        if(isKey){
-          const go=(tk)=>{ const sep=ctx.url.includes('?')?'&':'?'; ctx.url=ctx.url+sep+'token='+encodeURIComponent(tk.token)+'&expires='+tk.expires; super.load(ctx,cfg,cbs); };
-          const now=Math.floor(Date.now()/1000);
-          if(cached && cached.expires-5>now){ go(cached); }
-          else{ _signToken(vid).then(tk=>{ cached=tk; go(tk); }).catch(e=>{ if(cbs.onError)cbs.onError({code:0,text:'sign fail'},ctx,null); }); }
-          return;
-        }
-        super.load(ctx,cfg,cbs);
-      }
-    }
-    const hls=new Hls(Object.assign(_hlsConfig(vid),{loader:SignedLoader}));
-    host._hls=hls;
-    hls.loadSource(src); hls.attachMedia(v);
+  // Player: TODO caminho carrega a playlist do play.php, que já entrega o URI da KEY com o token
+  // curto embutido + segmentos absolutos + CORS. Assim não depende de loader customizado (que tinha
+  // race no key load = keyLoadError). hls.js no Chrome/Firefox/Edge e Safari desktop; nativo no iOS.
+  const slug=(D.convidado||{}).slug||'';
+  const playUrl=SIGN_BASE.replace(/sign\.php.*$/,'play.php')+'?slug='+encodeURIComponent(slug)+'&v='+encodeURIComponent(vid);
+  const goNative=function(){ v.src=playUrl; const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{ v.muted=true; v.play&&v.play(); }); };
+  if(window.Hls && Hls.isSupported()){
+    const hls=new Hls(_hlsConfig(vid)); host._hls=hls;
+    hls.loadSource(playUrl); hls.attachMedia(v);
     hls.on(Hls.Events.MANIFEST_PARSED,()=>{ const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{ v.muted=true; v.play&&v.play(); }); });
-    hls.on(Hls.Events.ERROR,(_,data)=>{ if(data&&data.fatal){ try{hls.destroy();}catch(e){} } });
+    hls.on(Hls.Events.ERROR,(_,data)=>{ if(data&&data.fatal){ try{hls.destroy();}catch(e){} host._hls=null; if(v.canPlayType('application/vnd.apple.mpegurl')) goNative(); } });
   } else {
-    // Safari/iOS: HLS nativo (a KEY não passa pelo hls.js). Pedimos a playlist ao play.php,
-    // que devolve o .m3u8 com o URI da KEY já carregando um token curto -> AVPlayer decripta.
-    const slug=(D.convidado||{}).slug||'';
-    const playUrl=SIGN_BASE.replace(/sign\.php.*$/,'play.php')+'?slug='+encodeURIComponent(slug)+'&v='+encodeURIComponent(vid);
-    v.src=playUrl;
-    const p=v.play&&v.play(); if(p&&p.catch)p.catch(()=>{ v.muted=true; v.play&&v.play(); });
+    goNative();
   }
 }
 function mountAllSecure(root){ (root||document).querySelectorAll('.securehost:not([data-done])').forEach(h=>{ h.setAttribute('data-done','1'); mountSecurePlayer(h); }); }
