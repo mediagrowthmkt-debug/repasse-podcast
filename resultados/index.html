@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Resultados dos convidados · Repasse Podcast</title>
+<meta name="description" content="O que o impulsionamento do Repasse Podcast entregou: visualizações, cliques e visitas ao perfil dos nossos convidados."/>
+<meta name="theme-color" content="#012D5A"/>
+<link rel="icon" type="image/png" href="assets/logo-icon.png"/>
+<link rel="apple-touch-icon" href="assets/logo-icon.png"/>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Resultados dos convidados · Repasse Podcast"/>
+<meta property="og:description" content="Visualizações, cliques ao Instagram e visitas ao perfil que o impulsionamento entregou aos convidados."/>
+<meta property="og:image" content="assets/logo-lockup.png"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
+<style>
+/* ====================================================================
+   REPASSE PODCAST · VITRINE DE RESULTADOS DOS CONVIDADOS
+   Azul/navy imersivo (marca Repasse). Estatico (sem re-render em loop).
+   ==================================================================== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#012D5A;         /* base da marca */
+  --navy-2:#001B38;       /* fundo profundo */
+  --navy-3:#00122a;       /* base mais escura */
+  --azul:#01509D;         /* apoio */
+  --azul-neon:#1E8BFF;    /* realce/brilho */
+  --vermelho:#FE3231;     /* destaque/play */
+  --branco:#FFFFFF;
+  --aqua:#7CC6FF;
+  --glass:rgba(255,255,255,.055);
+  --glass-bd:rgba(124,198,255,.18);
+  --glass-hi:rgba(255,255,255,.14);
+  --txt-soft:rgba(226,240,255,.72);
+  --txt-dim:rgba(226,240,255,.5);
+  --fh:'Sora',sans-serif;
+  --fb:'Inter',sans-serif;
+  --maxw:1080px;
+}
+html{scroll-behavior:smooth;background:var(--navy-3)}
+body{
+  font-family:var(--fb);color:var(--branco);min-height:100dvh;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;line-height:1.5;
+  background:
+    radial-gradient(120% 60% at 50% -8%, color-mix(in srgb, var(--azul) 60%, var(--navy)) 0%, rgba(0,0,0,0) 58%),
+    radial-gradient(90% 50% at 100% 0%, color-mix(in srgb, var(--vermelho) 16%, transparent) 0%, transparent 46%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 42%, var(--navy-3) 100%);
+  background-repeat:no-repeat;background-size:100% 140vh;
+}
+/* ===== fundo animado (blobs + grade + brilho) ===== */
+.bgfx{position:fixed;inset:0;z-index:-3;overflow:hidden;pointer-events:none}
+.bgfx .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.42;mix-blend-mode:screen}
+.bgfx .b1{width:52vw;height:52vw;left:-14vw;top:-10vh;background:var(--azul);animation:float1 20s ease-in-out infinite}
+.bgfx .b2{width:44vw;height:44vw;right:-14vw;top:6vh;background:var(--azul-neon);animation:float2 26s ease-in-out infinite}
+.bgfx .b3{width:40vw;height:40vw;left:24vw;bottom:-16vh;background:var(--vermelho);opacity:.18;animation:float1 30s ease-in-out infinite reverse}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(6%,7%)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-7%,5%)}}
+.grid{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(124,198,255,.06) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(124,198,255,.06) 1px,transparent 1px);
+  background-size:54px 54px;
+  -webkit-mask-image:radial-gradient(80% 60% at 50% 0%,#000 0%,transparent 78%);
+          mask-image:radial-gradient(80% 60% at 50% 0%,#000 0%,transparent 78%);}
+.scan{position:fixed;left:0;right:0;top:0;height:38vh;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--azul-neon) 12%,transparent),transparent);
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent);mask-image:linear-gradient(180deg,#000,transparent)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+/* ===== topo ===== */
+.top{display:flex;align-items:center;justify-content:space-between;padding:26px 0 6px;gap:12px}
+.top .brand{display:flex;align-items:center;gap:12px}
+.top .brand img{height:44px;width:auto;filter:drop-shadow(0 4px 18px rgba(30,139,255,.5))}
+.top .pill{font-family:var(--fh);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--aqua);
+  border:1px solid var(--glass-bd);border-radius:999px;padding:7px 13px;background:var(--glass);white-space:nowrap}
+
+/* ===== hero ===== */
+.hero{text-align:center;padding:38px 0 8px}
+.hero .eyebrow{font-family:var(--fh);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--aqua);
+  display:inline-flex;align-items:center;gap:9px;margin-bottom:16px}
+.hero .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--vermelho);box-shadow:0 0 0 0 rgba(254,50,49,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(254,50,49,.55)}70%{box-shadow:0 0 0 12px rgba(254,50,49,0)}100%{box-shadow:0 0 0 0 rgba(254,50,49,0)}}
+.hero h1{font-family:var(--fh);font-weight:800;font-size:clamp(30px,6vw,58px);line-height:1.04;letter-spacing:-.02em}
+.hero h1 .g{background:linear-gradient(100deg,var(--aqua),var(--azul-neon) 55%,#bfe0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{max-width:660px;margin:18px auto 0;color:var(--txt-soft);font-size:clamp(15px,2.2vw,18px)}
+
+/* ===== KPIs agregados ===== */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:34px 0 8px}
+.kpi{position:relative;background:var(--glass);border:1px solid var(--glass-bd);border-radius:20px;padding:22px 16px;text-align:center;
+  overflow:hidden;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.kpi::before{content:'';position:absolute;inset:0;border-radius:20px;padding:1px;
+  background:linear-gradient(140deg,rgba(124,198,255,.5),transparent 45%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.kpi .n{font-family:var(--fh);font-weight:800;font-size:clamp(26px,4.4vw,44px);line-height:1;
+  background:linear-gradient(180deg,#fff,var(--aqua));-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 30px rgba(30,139,255,.25)}
+.kpi .l{margin-top:9px;font-size:12.5px;color:var(--txt-soft);letter-spacing:.02em}
+.kpi .ic{font-size:18px;margin-bottom:8px;opacity:.9}
+.kpi.hot .n{background:linear-gradient(180deg,#fff,#ffd0cf);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ===== como funciona ===== */
+.how{margin:40px 0 8px;background:linear-gradient(160deg,rgba(1,80,157,.24),rgba(1,45,90,.14));
+  border:1px solid var(--glass-bd);border-radius:24px;padding:26px 22px}
+.how h2{font-family:var(--fh);font-weight:700;font-size:clamp(18px,3vw,24px);margin-bottom:6px}
+.how .lead{color:var(--txt-soft);font-size:14.5px;max-width:720px}
+.how .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+.step{background:var(--glass);border:1px solid var(--glass-hi);border-radius:16px;padding:16px}
+.step .h{font-family:var(--fh);font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.step .num{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;font-size:12px;
+  background:linear-gradient(135deg,var(--azul),var(--azul-neon));color:#fff;flex:none}
+.step p{font-size:13px;color:var(--txt-soft)}
+.note{margin-top:18px;display:flex;gap:12px;align-items:flex-start;background:rgba(254,50,49,.08);
+  border:1px solid rgba(254,50,49,.32);border-radius:14px;padding:14px 16px}
+.note .b{font-size:20px;line-height:1;filter:drop-shadow(0 0 8px rgba(254,50,49,.5))}
+.note strong{color:#fff}
+.note .t{font-size:13.5px;color:#ffe6e5}
+
+/* ===== convidados ===== */
+.sec-title{font-family:var(--fh);font-weight:700;font-size:clamp(19px,3.4vw,26px);margin:52px 0 6px;text-align:center}
+.sec-sub{text-align:center;color:var(--txt-dim);font-size:13.5px;margin-bottom:26px}
+
+.guest{position:relative;background:linear-gradient(165deg,#0a2144,#061a38 60%,#04142d);
+  border:1px solid var(--glass-bd);border-radius:26px;padding:24px;margin-bottom:26px;overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,8,22,.5), inset 0 1px 0 rgba(255,255,255,.05)}
+.guest::after{content:'';position:absolute;top:-40%;right:-20%;width:60%;height:120%;pointer-events:none;z-index:0;
+  background:radial-gradient(closest-side,rgba(30,139,255,.16),transparent);}
+.guest>*{position:relative;z-index:1}
+.guest .gh{display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:relative}
+.avatar{width:60px;height:60px;border-radius:16px;flex:none;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy),var(--azul));border:1px solid var(--glass-bd);font-family:var(--fh);font-weight:800;font-size:22px;color:#cfe6ff}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.gh .who{flex:1;min-width:160px}
+.gh .who .nm{font-family:var(--fh);font-weight:700;font-size:20px;line-height:1.1}
+.gh .who .rl{color:var(--txt-soft);font-size:13px;margin-top:2px}
+.badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--fh);font-size:11px;font-weight:600;letter-spacing:.04em;
+  border-radius:999px;padding:7px 12px;white-space:nowrap}
+.badge.live{background:rgba(46,213,115,.12);border:1px solid rgba(46,213,115,.4);color:#a8f5c4}
+.badge.live .d{width:8px;height:8px;border-radius:50%;background:#2ed573;box-shadow:0 0 0 0 rgba(46,213,115,.6);animation:pulse2 1.8s infinite}
+@keyframes pulse2{0%{box-shadow:0 0 0 0 rgba(46,213,115,.5)}70%{box-shadow:0 0 0 9px rgba(46,213,115,0)}100%{box-shadow:0 0 0 0 rgba(46,213,115,0)}}
+.badge.done{background:var(--glass);border:1px solid var(--glass-hi);color:var(--txt-soft)}
+
+.meta-row{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--glass-hi);
+  border-radius:12px;padding:9px 13px;font-size:12.5px;color:var(--txt-soft)}
+.chip b{color:#fff;font-weight:600}
+.chip .i{opacity:.85}
+
+.gkpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:18px}
+.gk{background:rgba(2,20,44,.4);border:1px solid var(--glass-hi);border-radius:14px;padding:14px 8px;text-align:center}
+.gk .n{font-family:var(--fh);font-weight:800;font-size:clamp(18px,3vw,26px);line-height:1;color:#fff}
+.gk .n.blue{color:#8ecbff}
+.gk .n.red{color:#ff8b8a}
+.gk .l{font-size:11px;color:var(--txt-dim);margin-top:6px;line-height:1.25}
+
+.vids-h{font-family:var(--fh);font-weight:600;font-size:13px;letter-spacing:.03em;color:var(--txt-soft);
+  margin:22px 0 12px;display:flex;align-items:center;gap:9px;text-transform:uppercase}
+.vids-h::before{content:'';width:5px;height:16px;border-radius:3px;background:linear-gradient(var(--azul-neon),var(--vermelho))}
+.vids{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.vid{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--glass-bd);cursor:pointer;
+  background:#02142c;aspect-ratio:9/13;isolation:isolate;transition:transform .2s ease,box-shadow .2s ease}
+.vid:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(1,45,90,.6)}
+.vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;transition:transform .4s ease}
+.vid:hover img{transform:scale(1.06)}
+.vid .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,18,42,0) 32%,rgba(0,10,26,.9) 100%)}
+.vid .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
+  display:grid;place-items:center;background:rgba(254,50,49,.92);box-shadow:0 6px 24px rgba(254,50,49,.5);color:#fff}
+.vid .play svg{width:20px;height:20px;margin-left:3px}
+.vid .cap{position:absolute;left:0;right:0;bottom:0;padding:12px}
+.vid .cap .st{display:flex;gap:10px;font-family:var(--fh);font-weight:700;font-size:12.5px}
+.vid .cap .st span{display:inline-flex;align-items:center;gap:4px}
+.vid .cap .st .u{font-family:var(--fb);font-weight:500;color:var(--txt-dim);font-size:10.5px;margin-left:2px}
+.vid .cap .pw{margin-top:6px;font-size:10.5px;color:var(--aqua);opacity:.9}
+.vid .tag{position:absolute;top:10px;left:10px;font-family:var(--fh);font-size:10px;font-weight:600;letter-spacing:.04em;
+  padding:5px 9px;border-radius:8px;background:rgba(0,10,26,.62);border:1px solid var(--glass-hi);color:#cfe6ff}
+.vid .tag.live{background:rgba(46,213,115,.16);border-color:rgba(46,213,115,.4);color:#b6f7cd}
+
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.lk{flex:1;min-width:190px;display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
+  font-family:var(--fh);font-weight:600;font-size:14px;border-radius:14px;padding:14px 16px;transition:transform .15s,filter .15s}
+.lk:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.lk.guest-lk{background:linear-gradient(120deg,var(--vermelho),#ff6a5f);color:#fff;box-shadow:0 8px 26px rgba(254,50,49,.36)}
+.lk.rep-lk{background:var(--glass);border:1px solid var(--glass-bd);color:#cfe6ff}
+.lk .sub{font-weight:400;font-size:11px;opacity:.85;display:block;margin-top:1px}
+
+/* ===== fecho ===== */
+.cta{text-align:center;margin:56px 0 10px;background:linear-gradient(160deg,rgba(1,80,157,.3),rgba(254,50,49,.1));
+  border:1px solid var(--glass-bd);border-radius:26px;padding:40px 24px}
+.cta img{height:48px;margin-bottom:16px;filter:drop-shadow(0 4px 18px rgba(30,139,255,.5))}
+.cta h2{font-family:var(--fh);font-weight:800;font-size:clamp(22px,4vw,34px);line-height:1.1}
+.cta p{color:var(--txt-soft);max-width:560px;margin:14px auto 22px;font-size:15px}
+.cta .go{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--fh);font-weight:700;
+  background:linear-gradient(120deg,var(--azul-neon),var(--azul));color:#fff;border-radius:14px;padding:15px 26px;
+  box-shadow:0 10px 30px rgba(30,139,255,.4)}
+footer{text-align:center;color:var(--txt-dim);font-size:12px;padding:30px 0 40px}
+footer .mg{color:var(--txt-soft)}
+
+/* ===== lightbox ===== */
+.lb{position:fixed;inset:0;z-index:60;background:rgba(0,8,22,.86);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;padding:20px}
+.lb.on{display:flex}
+.lb .box{width:min(420px,94vw);max-height:92dvh;overflow:auto;border-radius:20px;background:#0a1730;
+  border:1px solid var(--glass-bd);position:relative}
+.lb .x{position:absolute;top:10px;right:10px;z-index:2;width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;
+  background:rgba(0,10,26,.7);color:#fff;font-size:20px}
+.lb .lbhead{padding:16px 18px 4px;font-family:var(--fh);font-weight:700}
+.lb .lbstats{padding:0 18px 12px;color:var(--txt-soft);font-size:12.5px}
+.lb .frame{padding:0 12px 12px}
+.lb iframe{width:100%;border:none;border-radius:12px;background:#000}
+.lb .open-ig{display:block;text-align:center;margin:0 18px 18px;text-decoration:none;font-family:var(--fh);font-weight:600;
+  font-size:13.5px;color:#cfe6ff;border:1px solid var(--glass-bd);border-radius:12px;padding:12px;background:var(--glass)}
+
+/* animacao de entrada */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:720px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .how .steps{grid-template-columns:1fr}
+  .gkpis{grid-template-columns:repeat(3,1fr)}
+  .vids{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:420px){
+  .gkpis{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="bgfx"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<div class="grid"></div>
+<div class="scan"></div>
+
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><img src="assets/logo-lockup.png" alt="Repasse Podcast"/></div>
+    <div class="pill">Relatório de resultados</div>
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> Impulsionamento no ar</div>
+    <h1>Os resultados que o <span class="g">Repasse</span> entregou<br/>para os nossos convidados</h1>
+    <p class="sub">Todo mês nós impulsionamos os melhores cortes de cada convidado para o público certo, levando gente nova até o perfil dele. Estes são os números reais que essas campanhas já geraram.</p>
+  </section>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="how reveal">
+    <h2>Como o seu impulsionamento funciona</h2>
+    <p class="lead">Um trabalho contínuo, que roda o mês inteiro. A cada semana um corte novo entra no ar, alcançando quem realmente importa no mercado automotivo.</p>
+    <div class="steps">
+      <div class="step"><div class="h"><span class="num">1</span> Cortes selecionados</div><p>Escolhemos os melhores momentos do seu episódio e transformamos em cortes prontos para viralizar.</p></div>
+      <div class="step"><div class="h"><span class="num">2</span> No ar o mês todo</div><p>Cada corte é impulsionado por semana, rodando de forma contínua para o público automotivo certo.</p></div>
+      <div class="step"><div class="h"><span class="num">3</span> Gente no seu perfil</div><p>O objetivo é sempre o mesmo: levar pessoas novas até o Instagram do convidado para gerar autoridade e clientes.</p></div>
+    </div>
+    <div class="note">
+      <span class="b">📌</span>
+      <span class="t">Os anúncios saem no perfil do <strong>Repasse Podcast</strong>, mas cada clique e cada visita levam ao <strong>Instagram do convidado</strong>, nunca ao nosso. O tráfego é 100% seu. Se você quiser, deixamos os <strong>dois perfis vinculados</strong> nos cortes, o do Repasse e o seu.</span>
+    </div>
+  </section>
+
+  <h2 class="sec-title">Convidados que já rodaram</h2>
+  <p class="sec-sub" id="secsub"></p>
+  <div id="guests"></div>
+
+  <section class="cta reveal">
+    <img src="assets/logo-lockup.png" alt="Repasse Podcast"/>
+    <h2>Quer ver o seu nome aqui?</h2>
+    <p>Grave o seu episódio, escolha o seu pacote de cortes turbinados e deixe o impulsionamento levar o mercado automotivo até o seu perfil.</p>
+    <a class="go" id="repasseCta" href="#" target="_blank" rel="noopener">Falar com o Repasse Podcast →</a>
+  </section>
+
+  <footer>
+    <div class="mg">Repasse Podcast · marketing e tráfego por MediaGrowth</div>
+    <div id="stamp" style="margin-top:6px"></div>
+  </footer>
+</div>
+
+<!-- lightbox -->
+<div class="lb" id="lb">
+  <div class="box">
+    <button class="x" onclick="closeLb()">×</button>
+    <div class="lbhead" id="lbHead"></div>
+    <div class="lbstats" id="lbStats"></div>
+    <div class="frame" id="lbFrame"></div>
+    <a class="open-ig" id="lbOpen" href="#" target="_blank" rel="noopener">Ver o post no Instagram →</a>
+  </div>
+</div>
+
+<script>
+const DATA = {"gerado_em": "2026-07-25", "conta": "act_1275229611165039", "marca": {"nome": "Repasse Podcast", "ig": "https://www.instagram.com/repasse_podcast/", "navy": "#012D5A", "azul": "#01509D", "vermelho": "#FE3231", "branco": "#FFFFFF"}, "agregado": {"convidados": 2, "videos": 3, "views": 5062, "link_clicks": 915, "perfil": 568, "alcance": 9723, "impressoes": 14413}, "convidados": [{"slug": "cerol", "nome": "Cerol", "empresa": "Cerol Car", "cargo": "Cerol Car", "ig": null, "foto": null, "campaign_id": "120245149329970582", "campanha_nome": "13-07-26 - Reconhecimento - Reels - cerol", "no_ar": true, "periodo": {"ini": "2026-07-13", "fim": "2026-07-25", "dias": 13, "aberto": true}, "publico": "Lojistas e repassadores de veiculos (donos de loja de carro)", "regiao": "Florianópolis", "idade": "18 a 65 anos", "kpis": {"views": 3566, "link_clicks": 675, "perfil": 411, "alcance": 6664, "impressoes": 10780, "cliques": 703, "ctr": 6.5}, "videos": [{"nome": "videomaker", "ig": "https://www.instagram.com/p/DbBraZPg9iE/", "capa": "assets/reels/DbBraZPg9iE.jpg", "views": 1259, "link_clicks": 283, "perfil": 185, "desde": "2026-07-13", "ate": "2026-07-25", "dias": 13, "no_ar": true}, {"nome": "corte 1 bmw", "ig": "https://www.instagram.com/p/Dav1Pq6g9aU/", "capa": "assets/reels/Dav1Pq6g9aU.jpg", "views": 2307, "link_clicks": 392, "perfil": 226, "desde": "2026-07-13", "ate": "2026-07-25", "dias": 13, "no_ar": false}]}, {"slug": "dani", "nome": "Dani", "empresa": "", "cargo": "", "ig": "https://www.instagram.com/eudanirepassefloripa/", "foto": null, "campaign_id": "120245479490130582", "campanha_nome": "24-07-26 - Reconhecimento - Reel Dani Repasse Floripa", "no_ar": true, "periodo": {"ini": "2026-07-24", "fim": "2026-07-25", "dias": 2, "aberto": true}, "publico": "Lojistas e repassadores de veiculos (donos de loja de carro, do pequeno ao premium)", "regiao": "Florianópolis", "idade": "18 a 65 anos", "kpis": {"views": 1496, "link_clicks": 240, "perfil": 157, "alcance": 3059, "impressoes": 3633, "cliques": 262, "ctr": 7.2}, "videos": [{"nome": "Reel Dani Repasse Floripa", "ig": "https://www.instagram.com/p/DbBwq4ygIWN/", "capa": "assets/reels/DbBwq4ygIWN.jpg", "views": 1500, "link_clicks": 243, "perfil": 160, "desde": "2026-07-20", "ate": "2026-07-25", "dias": 6, "no_ar": true}]}]};
+
+/* ---------- utils ---------- */
+const nf = new Intl.NumberFormat('pt-BR');
+const fmt = n => (n==null?'—':nf.format(n));
+function igCode(u){ const m=(u||'').match(/\/(p|reel|reels)\/([^\/?#]+)/); return m?m[2]:null; }
+function dfmt(iso){ if(!iso) return ''; const [y,m,d]=iso.split('-'); return `${d}/${m}`; }
+function periodo(p){
+  if(!p||!p.ini) return 'Campanha no ar';
+  const dias=p.dias, faixa=`${dfmt(p.ini)} a ${dfmt(p.fim)}`;
+  if(dias!=null && dias<=2) return `Começou agora · ${faixa}`;
+  if(dias!=null) return `${dias} dias no ar · ${faixa}`;
+  return faixa;
+}
+
+/* ---------- KPIs agregados ---------- */
+(function(){
+  const a=DATA.agregado||{};
+  const cards=[
+    {ic:'👁️',n:a.views,l:'Visualizações dos cortes'},
+    {ic:'🔗',n:a.link_clicks,l:'Cliques para o Instagram',hot:true},
+    {ic:'👤',n:a.perfil,l:'Visitas ao perfil'},
+    {ic:'📡',n:a.alcance,l:'Pessoas alcançadas'},
+  ];
+  document.getElementById('kpis').innerHTML = cards.map(c=>`
+    <div class="kpi ${c.hot?'hot':''}">
+      <div class="ic">${c.ic}</div>
+      <div class="n" data-count="${c.n||0}">0</div>
+      <div class="l">${c.l}</div>
+    </div>`).join('');
+  const nconv=a.convidados||0, nvid=a.videos||0;
+  document.getElementById('secsub').textContent =
+    `${nconv} convidado${nconv==1?'':'s'} impulsionado${nconv==1?'':'s'} · ${nvid} corte${nvid==1?'':'s'} rodando no mercado automotivo`;
+})();
+
+/* ---------- convidados ---------- */
+function avatar(g){
+  if(g.foto) return `<div class="avatar"><img src="${g.foto}" alt="${g.nome}"></div>`;
+  const ini=(g.nome||'?').trim()[0]||'?';
+  return `<div class="avatar">${ini.toUpperCase()}</div>`;
+}
+function guestCard(g){
+  const k=g.kpis||{}, p=g.periodo||{};
+  const live = g.no_ar;
+  const role = [...new Set([g.cargo,g.empresa].filter(Boolean))].join(' · ');
+  const chips=[];
+  if(p.ini) chips.push(`<span class="chip"><span class="i">🗓️</span><b>${periodo(p)}</b></span>`);
+  if(g.publico) chips.push(`<span class="chip"><span class="i">🎯</span>${g.publico}</span>`);
+  if(g.regiao) chips.push(`<span class="chip"><span class="i">📍</span><b>${g.regiao}</b></span>`);
+  if(g.idade) chips.push(`<span class="chip"><span class="i">👥</span>${g.idade}</span>`);
+  const gk=[
+    {n:k.views,l:'Visualizações',c:''},
+    {n:k.link_clicks,l:'Cliques ao Instagram',c:'red'},
+    {n:k.perfil,l:'Visitas ao perfil',c:'blue'},
+    {n:k.alcance,l:'Alcance',c:''},
+    {n:k.ctr!=null?k.ctr+'%':null,l:'Taxa de cliques',c:'blue',raw:true},
+  ];
+  const vids=(g.videos||[]).map((v,i)=>videoCell(g,v,i)).join('');
+  const guestLink = g.ig ? `<a class="lk guest-lk" href="${g.ig}" target="_blank" rel="noopener">
+       <span>Ver o perfil do convidado<span class="sub">${(g.ig||'').replace(/^https?:\/\/(www\.)?instagram\.com\//,'@').replace(/\/$/,'')}</span></span></a>` : '';
+  return `
+  <div class="guest reveal">
+    <div class="gh">
+      ${avatar(g)}
+      <div class="who"><div class="nm">${g.nome}</div>${role?`<div class="rl">${role}</div>`:''}</div>
+      ${live?`<span class="badge live"><span class="d"></span> No ar agora</span>`:`<span class="badge done">Campanha realizada</span>`}
+    </div>
+    <div class="meta-row">${chips.join('')}</div>
+    <div class="gkpis">
+      ${gk.map(x=>`<div class="gk"><div class="n ${x.c}">${x.raw?(x.n??'—'):fmt(x.n)}</div><div class="l">${x.l}</div></div>`).join('')}
+    </div>
+    <div class="vids-h">Cortes que rodaram</div>
+    <div class="vids">${vids}</div>
+    <div class="links">
+      ${guestLink}
+      <a class="lk rep-lk" href="${DATA.marca.ig}" target="_blank" rel="noopener">
+        <span>Perfil do Repasse Podcast<span class="sub">@repasse_podcast</span></span></a>
+    </div>
+  </div>`;
+}
+function videoCell(g,v,i){
+  const cap = v.capa || '';
+  const tag = v.no_ar ? `<span class="tag live">● no ar</span>` : `<span class="tag">corte ${i+1}</span>`;
+  return `
+  <div class="vid" onclick='openLb(${JSON.stringify(g.nome)},${JSON.stringify(v)})'>
+    <img loading="lazy" src="${cap}" alt="Corte ${i+1} de ${g.nome}" onerror="this.style.opacity=.15"/>
+    <div class="ov"></div>
+    ${tag}
+    <div class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+    <div class="cap">
+      <div class="st">
+        <span>${fmt(v.views)}<span class="u">views</span></span>
+        <span>${fmt(v.link_clicks)}<span class="u">cliques</span></span>
+        <span>${fmt(v.perfil)}<span class="u">no perfil</span></span>
+      </div>
+    </div>
+  </div>`;
+}
+document.getElementById('guests').innerHTML = (DATA.convidados||[]).map(guestCard).join('');
+document.getElementById('repasseCta').href = DATA.marca.ig;
+document.getElementById('stamp').textContent = 'Atualizado em ' + dfmt(DATA.gerado_em) + '/' + (DATA.gerado_em||'').split('-')[0];
+
+/* ---------- lightbox ---------- */
+function openLb(nome,v){
+  const code=igCode(v.ig);
+  document.getElementById('lbHead').textContent = 'Corte de ' + nome;
+  document.getElementById('lbStats').innerHTML =
+    `${fmt(v.views)} visualizações · ${fmt(v.link_clicks)} cliques ao Instagram · ${fmt(v.perfil)} visitas ao perfil`;
+  const fr=document.getElementById('lbFrame');
+  const emb = v.ig ? (v.ig.endsWith('/')?v.ig:v.ig+'/')+'embed/captioned/' : null;
+  fr.innerHTML = emb
+    ? `<iframe src="${emb}" height="620" scrolling="no" allowtransparency="true"></iframe>`
+    : `<img src="${v.capa}" style="width:100%;border-radius:12px"/>`;
+  document.getElementById('lbOpen').href = v.ig;
+  document.getElementById('lb').classList.add('on');
+}
+function closeLb(){ document.getElementById('lb').classList.remove('on'); document.getElementById('lbFrame').innerHTML=''; }
+document.getElementById('lb').addEventListener('click',e=>{ if(e.target.id==='lb') closeLb(); });
+
+/* ---------- count-up + reveal (uma vez, sem loop de render) ---------- */
+function countUp(el){
+  const target=+el.dataset.count||0; const dur=1100; const t0=performance.now();
+  function tick(t){ const p=Math.min(1,(t-t0)/dur); const e=1-Math.pow(1-p,3);
+    el.textContent=nf.format(Math.round(target*e)); if(p<1) requestAnimationFrame(tick); }
+  requestAnimationFrame(tick);
+}
+function activate(el){
+  el.classList.add('in');
+  el.querySelectorAll?.('.n[data-count]').forEach(countUp);
+  if(el.matches?.('.n[data-count]')) countUp(el);
+}
+const supportsIO = 'IntersectionObserver' in window;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const els = [...document.querySelectorAll('.reveal,.kpi .n[data-count]')];
+if(supportsIO && !reduce){
+  const io=new IntersectionObserver((es)=>{ es.forEach(en=>{ if(en.isIntersecting){ activate(en.target); io.unobserve(en.target); }});},{threshold:.2});
+  els.forEach(el=>io.observe(el));
+  // fallback ONE-SHOT (nao e loop de render): garante que nada fique invisivel se o IO nao disparar
+  setTimeout(()=>els.forEach(el=>{ if(!el.classList.contains('in')) activate(el); }), 2600);
+}else{
+  els.forEach(activate);
+}
+</script>
+</body>
+</html>

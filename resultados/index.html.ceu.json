@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "type": "html",
+  "kind": "resultados_clientes_podcast",
+  "asset": "index.html",
+  "source": {
+    "dados": "../../../07_mediagrowth/scripts/resultados-clientes-podcast/resultados.json",
+    "template": "../../../07_mediagrowth/scripts/resultados-clientes-podcast/template.html"
+  },
+  "render_command": "python3 ../../../07_mediagrowth/scripts/resultados-clientes-podcast/resultados.py build",
+  "notes": "Atualizar numeros = 'resultados.py scan' (le o Gerenciador) + 'gerar'. Publicar = 'publicar'."
+}
