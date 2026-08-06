@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validação de Cortes: Henrique Caju · HM Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#012D5A;--navy-2:#071f38;--navy-3:#0b294a;--card:#0d3160;--red:#FE3231;--blue:#01509D;--white:#fff;--muted:#9fb6d4;--ok:#1db954;--adj:#f0a020;--no:#FE3231;--line:rgba(255,255,255,.10);}
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,#0a3d78 0,transparent 60%),var(--navy-2);background-color:var(--navy-2);color:var(--white);line-height:1.5}
+  a{color:inherit} .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+  header.top{background:linear-gradient(180deg,var(--navy) 0,var(--navy-2) 100%);border-bottom:3px solid var(--red);padding:24px 0 20px}
+  .brand{display:flex;align-items:center;gap:16px} .brand img{width:56px;height:56px;border-radius:14px;box-shadow:0 6px 22px rgba(0,0,0,.35)}
+  .brand h1{font-size:20px;margin:0;font-weight:800} .brand p{margin:2px 0 0;color:var(--muted);font-size:13px;font-weight:600}
+  .kicker{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+  .note{margin-top:14px;background:rgba(254,50,49,.10);border:1px solid rgba(254,50,49,.45);border-radius:12px;padding:11px 14px;font-size:13px;color:#ffd9d8} .note b{color:#fff}
+  .section-title{display:flex;align-items:center;gap:10px;margin:24px 0 12px} .section-title .line{flex:1;height:1px;background:var(--line)}
+  .section-title span{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .full .frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.45);background:#000}
+  .full video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+  .fulldec{margin-top:12px;background:linear-gradient(180deg,var(--card) 0,#0a2a53 100%);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .fulldec__q{font-size:15px;font-weight:800;margin-bottom:10px}
+  .decisao{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .btn{border:none;color:#fff;border-radius:10px;padding:11px 14px;font-size:13.5px;font-weight:800;cursor:pointer;transition:.15s;box-shadow:0 3px 10px rgba(0,0,0,.25)}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+  .btn--ok{background:var(--ok);color:#053218} .btn--adj{background:var(--adj);color:#3a2600} .btn--no{background:var(--no);color:#fff}
+  .resumo{margin:2px 0 14px;color:#cfe0f6;font-size:13px;background:var(--navy-3);border:1px solid var(--line);border-radius:10px;padding:9px 13px}
+  .grid{display:grid;grid-template-columns:1fr;gap:20px;margin:12px 0 40px} @media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+  .card{background:linear-gradient(180deg,var(--card) 0,#0a2a53 100%);border:2px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s}
+  .card.dom-ok,.fulldec.dom-ok{border-color:var(--ok);box-shadow:0 0 0 1px rgba(29,185,84,.55)}
+  .card.dom-adj,.fulldec.dom-adj{border-color:var(--adj);box-shadow:0 0 0 1px rgba(240,160,32,.55)}
+  .card.dom-no,.fulldec.dom-no{border-color:var(--no);box-shadow:0 0 0 1px rgba(254,50,49,.55)}
+  .modal__msg{font-size:13.5px;color:#cfe0f6;font-weight:600;margin:-4px 0 14px;line-height:1.45}
+  .modal__cru{font-size:12px;color:#ffd98a;background:rgba(240,160,32,.10);border:1px dashed rgba(240,160,32,.5);border-radius:8px;padding:8px 10px;margin:2px 0 14px;line-height:1.4} .modal__cru b{color:#fff}
+  .chip--cru{background:rgba(240,160,32,.16);color:#ffd98a;border-color:rgba(240,160,32,.45)}
+  .cru-tag{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;color:#ffd98a;background:rgba(240,160,32,.10);border:1px dashed rgba(240,160,32,.5);border-radius:8px;padding:6px 10px}
+  .card__media{position:relative;background:#000} .player{display:block;width:100%;aspect-ratio:16/9;background:#000}
+  .badge{position:absolute;top:10px;left:10px;z-index:2;background:rgba(1,45,90,.85);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;letter-spacing:1px} .star{color:#ffd23f}
+  .rank{position:absolute;top:10px;right:10px;z-index:2;color:#04310f;background:#ffd23f;border-radius:999px;padding:3px 11px;font-size:13px;font-weight:900;box-shadow:0 3px 10px rgba(0,0,0,.35)} .rank:empty{display:none}
+  .card__body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:12px}
+  .meta{display:flex;flex-wrap:wrap;gap:6px} .chip{font-size:11px;font-weight:700;background:var(--navy);border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:#cfe0f6}
+  .chip--time{color:#fff;background:var(--blue);border-color:transparent} .chip--tag{color:#ffd9d8;background:rgba(254,50,49,.14);border-color:rgba(254,50,49,.35)}
+  .chip--ctx{cursor:pointer;text-decoration:none} .chip--ctx:hover{background:var(--red);color:#fff;border-color:transparent}
+  .card__title{margin:0;font-size:17px;font-weight:800;line-height:1.25} .card__desc{margin:0;font-size:14px;color:#dbe7f7}
+  .block{border-radius:12px;padding:11px 13px;font-size:13.5px} .block__head{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .block--legenda{background:rgba(1,80,157,.16);border:1px solid rgba(1,80,157,.5)} .block--legenda .legenda{margin:0;color:#eaf2ff;font-weight:600}
+  .block--motivo{background:rgba(255,255,255,.03);border:1px solid var(--line)} .block--motivo p{margin:0;color:#c3d4ec}
+  .mini{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer}
+  .rating{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(255,210,63,.06);border:1px solid rgba(255,210,63,.28);border-radius:12px;padding:9px 13px}
+  .rate-lbl{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:#ffd98a} .rate-lbl small{font-weight:700;color:#caa85a}
+  .stars{display:inline-flex;gap:1px;font-size:22px;line-height:1;cursor:pointer;user-select:none}
+  .rstar{color:#3a4a63;transition:color .08s,transform .08s} .rstar:hover{transform:scale(1.18)} .rstar.on{color:#ffd23f} .rstar.mine{color:#ffb300;text-shadow:0 0 8px rgba(255,179,0,.55)}
+  .rate-big{font-size:30px;font-weight:900;line-height:1;color:#3a4a63;min-width:40px;text-align:center;letter-spacing:-1px} .rate-big.has{color:#ffd23f;text-shadow:0 0 12px rgba(255,210,63,.4)}
+  .rate-avg{font-size:12.5px;font-weight:800;color:#ffd98a;margin-left:auto;text-align:right}
+  .sec-note{margin:-4px 0 12px;color:#bcd0ea;font-size:13px;line-height:1.5}
+  .card--bloco{background:linear-gradient(180deg,#0b2f47 0,#08233a 100%)}
+  .badge--yt{background:#c4302b;color:#fff}
+  .chip--dur{background:#c4302b;color:#fff;border-color:transparent;font-weight:800}
+  .chip--score{background:rgba(255,210,63,.16);color:#ffe08a;border-color:rgba(255,210,63,.4)}
+  .chip--mid{background:rgba(1,80,157,.2);color:#cfe0f6;border-color:rgba(1,80,157,.5)}
+  .chip--okflag{background:rgba(29,185,84,.16);color:#7ff0a8;border-color:rgba(29,185,84,.4)}
+  .chip--warn{background:rgba(240,160,32,.14);color:#ffd98a;border-color:rgba(240,160,32,.45)}
+  .block--hook{background:rgba(196,48,43,.12);border:1px solid rgba(196,48,43,.4)} .block--hook .hook{margin:0;font-size:15px;font-weight:800;color:#fff;line-height:1.35} .block--hook .hook-why{margin:6px 0 0;font-size:12.5px;color:#e6b7b5}
+  .block--titulos .titulos{margin:2px 0 0;padding-left:20px} .block--titulos .titulos li{font-size:13.5px;color:#eaf2ff;font-weight:600;margin:3px 0}
+  .bloco-tec{display:flex;flex-wrap:wrap;gap:6px}
+  .feed{display:flex;flex-direction:column;gap:8px;margin-top:2px}
+  .feed-empty{color:var(--muted);font-size:12.5px;font-style:italic}
+  .fb{background:var(--navy-2);border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:10px;padding:9px 11px}
+  .fb--ok{border-left-color:var(--ok)} .fb--no{border-left-color:var(--no)} .fb--adj{border-left-color:var(--adj)}
+  .fb__h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12.5px} .fb__h b{font-weight:800}
+  .fb__tag{font-weight:800;font-size:11px;padding:2px 8px;border-radius:999px}
+  .fb--ok .fb__tag{background:rgba(29,185,84,.2);color:#7ff0a8} .fb--no .fb__tag{background:rgba(254,50,49,.18);color:#ffb3b2} .fb--adj .fb__tag{background:rgba(240,160,32,.2);color:#ffd98a}
+  .fb--nota{border-left-color:#ffd23f} .fb--nota .fb__tag{background:rgba(255,210,63,.2);color:#ffe08a}
+  .fb__t{color:var(--muted);font-size:11px;margin-left:auto} .fb p{margin:6px 0 0;font-size:13.5px;color:#dbe7f7}
+  .modal{position:fixed;inset:0;background:rgba(2,10,22,.72);display:none;align-items:center;justify-content:center;z-index:200;padding:18px}
+  .modal.show{display:flex} .modal__box{background:linear-gradient(180deg,var(--card) 0,#0a2a53 100%);border:1px solid var(--line);border-radius:16px;padding:20px;max-width:440px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .modal__title{font-size:17px;font-weight:800;margin-bottom:14px} .mt-badge{font-size:12px;padding:3px 10px;border-radius:999px;margin-left:8px;background:rgba(255,255,255,.1)}
+  .modal label{display:block;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .modal input,.modal textarea{width:100%;margin-top:6px;font-family:inherit;font-size:15px;font-weight:500;text-transform:none;letter-spacing:0;color:#fff;background:var(--navy-2);border:1px solid var(--line);border-radius:10px;padding:11px}
+  .modal textarea{font-size:14px;resize:vertical} .modal input:focus,.modal textarea:focus{outline:none;border-color:var(--blue)}
+  .modal__actions{display:flex;gap:10px;justify-content:flex-end;margin-top:4px}
+  .modal__actions button{border:none;border-radius:10px;padding:10px 18px;font-size:14px;font-weight:800;cursor:pointer}
+  .m-cancel{background:var(--navy);color:#fff;border:1px solid var(--line)!important} .m-ok{background:#25D366;color:#04310f}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:22px 0 40px}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:#000;border:1px solid var(--line);color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:700;transition:.25s;pointer-events:none;z-index:250} .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:520px){ .decisao .btn{flex:1 1 30%;padding:10px 6px;font-size:12px;text-align:center} .brand h1{font-size:18px} }
+</style></head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="kicker">Validação de cortes</span>
+  <div class="brand"><img src="assets/logo-repasse-podcast.png" alt="logo">
+    <div><h1>Henrique Caju · HM Premium</h1><p>Repasse Podcast &middot; 15 cortes selecionados</p></div></div>
+  <div class="note"><b>Como funciona:</b> avalie o <b>podcast inteiro</b> em cima e cada <b>corte</b> embaixo. Em cada um, dê uma <b>nota de 2 a 10</b> nas estrelas e clique em <b>Aprovar</b>, <b>Pedir alterações</b> ou <b>Reprovar</b> (abre uma janelinha pra pôr o seu nome e o que você quer). Fica salvo na lista embaixo e todo mundo vê.<br><b>Atenção:</b> estes vídeos são <b>cortes crus</b> (sem edição). Aqui você aprova só o <b>conteúdo, o texto e o trecho</b>. A <b>edição final</b> (formato vertical, legendas, ajustes) vem depois. <b>Não é o corte final.</b></div>
+</div></header>
+<main class="wrap">
+  <section class="full">
+    <div class="section-title"><span>Podcast completo</span><div class="line"></div></div>
+    <div class="frame"><video id="full" controls preload="metadata" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-01.jpg">
+      <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/completo.mp4" type="video/mp4">Seu navegador não suporta vídeo.</video></div>
+    <div class="cru-tag">&#127909; Gravação/corte cru, sem edição. A edição final vem depois. Não é o vídeo final.</div>
+    <div class="fulldec" id="fulldec">
+      <div class="fulldec__q">O que você achou do podcast inteiro?</div>
+      <div class="decisao">
+        <button type="button" class="btn btn--ok"  onclick="abrir('full','','aprovado')">&#10003; Aprovar</button>
+        <button type="button" class="btn btn--adj" onclick="abrir('full','','alteracoes')">&#9998; Pedir alterações</button>
+        <button type="button" class="btn btn--no"  onclick="abrir('full','','reprovado')">&#10007; Reprovar</button>
+      </div>
+      <div class="feed" id="feed-full"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+    </div>
+  </section>
+  <div class="section-title"><span>Cortes curtos (Reels e Shorts)</span><div class="line"></div></div>
+  <div class="resumo" id="resumo">carregando avaliações...</div>
+  <div class="grid">
+    <article class="card" id="card-01" data-cid="01" data-idx="0">
+      <div class="card__media">
+        <div class="badge">CORTE 01 </div>
+        <div class="rank" id="rank-01"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-01.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-01.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 01:32 a 02:18</span>
+          <span class="chip">46s</span>
+          <span class="chip chip--tag">Trajetoria</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(92);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(138);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Comecei lavando motor com escovinha de dente</h3>
+        <p class="card__desc">O comeco na loja do pai, aos 14 anos, na base do sacrificio.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'01')">copiar</button></div>
+          <p class="legenda" id="leg-01">Antes da loja premium, era escovinha de dente pra lavar motor aos 14 anos. Todo imperio comeca em algum lugar. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Abertura de historia, humildade e identificacao.</p></div>
+        <div class="rating" id="rate-01">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('01',2)" onmouseout="rateLeave('01')" onclick="rateClick('01',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('01',3)" onmouseout="rateLeave('01')" onclick="rateClick('01',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('01',4)" onmouseout="rateLeave('01')" onclick="rateClick('01',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('01',5)" onmouseout="rateLeave('01')" onclick="rateClick('01',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('01',6)" onmouseout="rateLeave('01')" onclick="rateClick('01',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('01',7)" onmouseout="rateLeave('01')" onclick="rateClick('01',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('01',8)" onmouseout="rateLeave('01')" onclick="rateClick('01',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('01',9)" onmouseout="rateLeave('01')" onclick="rateClick('01',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('01',10)" onmouseout="rateLeave('01')" onclick="rateClick('01',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-01">-</span>
+          <span class="rate-avg" id="rateavg-01"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','01','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','01','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','01','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-01"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-02" data-cid="02" data-idx="1">
+      <div class="card__media">
+        <div class="badge">CORTE 02 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-02"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-02.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-02.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 06:39 a 07:53</span>
+          <span class="chip">74s</span>
+          <span class="chip chip--tag">Historia / alerta</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(399);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(473);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">O golpe que custou quase 5 milhoes</h3>
+        <p class="card__desc">Um ex-gerente montou loja, todo mundo consignou e ele sumiu com tudo.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'02')">copiar</button></div>
+          <p class="legenda" id="leg-02">O cara foi nosso gerente, montou a propria loja, todo mundo confiou e um dia sumiu com os carros. O prejuizo daria uns 5 milhoes hoje. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Drama e curiosidade, alerta real do ramo.</p></div>
+        <div class="rating" id="rate-02">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('02',2)" onmouseout="rateLeave('02')" onclick="rateClick('02',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('02',3)" onmouseout="rateLeave('02')" onclick="rateClick('02',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('02',4)" onmouseout="rateLeave('02')" onclick="rateClick('02',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('02',5)" onmouseout="rateLeave('02')" onclick="rateClick('02',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('02',6)" onmouseout="rateLeave('02')" onclick="rateClick('02',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('02',7)" onmouseout="rateLeave('02')" onclick="rateClick('02',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('02',8)" onmouseout="rateLeave('02')" onclick="rateClick('02',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('02',9)" onmouseout="rateLeave('02')" onclick="rateClick('02',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('02',10)" onmouseout="rateLeave('02')" onclick="rateClick('02',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-02">-</span>
+          <span class="rate-avg" id="rateavg-02"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','02','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','02','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','02','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-02"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-03" data-cid="03" data-idx="2">
+      <div class="card__media">
+        <div class="badge">CORTE 03 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-03"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-03.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-03.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 11:55 a 13:19</span>
+          <span class="chip">84s</span>
+          <span class="chip chip--tag">Estrategia / premium</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(715);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(799);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Por que so trabalho com carro 2023 pra cima</h3>
+        <p class="card__desc">A estrategia de vender so carro na garantia de fabrica e sinalizar isso no anuncio.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'03')">copiar</button></div>
+          <p class="legenda" id="leg-03">Trabalho com carro 2023 pra cima pra todos estarem na garantia de fabrica. Ai a garantia dOi menos no meu bolso e o cliente compra com seguranca. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Sacada de posicionamento, autoridade pratica.</p></div>
+        <div class="rating" id="rate-03">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('03',2)" onmouseout="rateLeave('03')" onclick="rateClick('03',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('03',3)" onmouseout="rateLeave('03')" onclick="rateClick('03',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('03',4)" onmouseout="rateLeave('03')" onclick="rateClick('03',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('03',5)" onmouseout="rateLeave('03')" onclick="rateClick('03',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('03',6)" onmouseout="rateLeave('03')" onclick="rateClick('03',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('03',7)" onmouseout="rateLeave('03')" onclick="rateClick('03',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('03',8)" onmouseout="rateLeave('03')" onclick="rateClick('03',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('03',9)" onmouseout="rateLeave('03')" onclick="rateClick('03',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('03',10)" onmouseout="rateLeave('03')" onclick="rateClick('03',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-03">-</span>
+          <span class="rate-avg" id="rateavg-03"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','03','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','03','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','03','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-03"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-04" data-cid="04" data-idx="3">
+      <div class="card__media">
+        <div class="badge">CORTE 04 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-04"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-04.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-04.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 14:16 a 15:48</span>
+          <span class="chip">92s</span>
+          <span class="chip chip--tag">Opiniao / KM</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(856);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(948);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">O brasileiro gosta de ser enganado</h3>
+        <p class="card__desc">A critica a adulteracao de quilometragem e a solucao simples que ele daria pro Detran.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'04')">copiar</button></div>
+          <p class="legenda" id="leg-04">Baixar quilometragem e a folia do mercado. E acabaria facil: no licenciamento, foto do velocimetro com a KM real. Simples assim. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Opiniao polemica + solucao util, gera muito comentario.</p></div>
+        <div class="rating" id="rate-04">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('04',2)" onmouseout="rateLeave('04')" onclick="rateClick('04',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('04',3)" onmouseout="rateLeave('04')" onclick="rateClick('04',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('04',4)" onmouseout="rateLeave('04')" onclick="rateClick('04',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('04',5)" onmouseout="rateLeave('04')" onclick="rateClick('04',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('04',6)" onmouseout="rateLeave('04')" onclick="rateClick('04',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('04',7)" onmouseout="rateLeave('04')" onclick="rateClick('04',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('04',8)" onmouseout="rateLeave('04')" onclick="rateClick('04',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('04',9)" onmouseout="rateLeave('04')" onclick="rateClick('04',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('04',10)" onmouseout="rateLeave('04')" onclick="rateClick('04',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-04">-</span>
+          <span class="rate-avg" id="rateavg-04"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','04','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','04','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','04','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-04"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-05" data-cid="05" data-idx="4">
+      <div class="card__media">
+        <div class="badge">CORTE 05 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-05"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-05.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-05.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 21:49 a 23:00</span>
+          <span class="chip">71s</span>
+          <span class="chip chip--tag">Processo / blindagem</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1309);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1380);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Cautelar em todo carro, sem excecao</h3>
+        <p class="card__desc">Por que ele faz vistoria cautelar em cada carro que entra, ate num Fusca.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'05')">copiar</button></div>
+          <p class="legenda" id="leg-05">Todo carro que entra na minha loja faz cautelar, sem excecao, pode ser um Fusca. E ali ja acaba com 90% dos problemas. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Dica de processo que blinda a loja, autoridade.</p></div>
+        <div class="rating" id="rate-05">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('05',2)" onmouseout="rateLeave('05')" onclick="rateClick('05',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('05',3)" onmouseout="rateLeave('05')" onclick="rateClick('05',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('05',4)" onmouseout="rateLeave('05')" onclick="rateClick('05',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('05',5)" onmouseout="rateLeave('05')" onclick="rateClick('05',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('05',6)" onmouseout="rateLeave('05')" onclick="rateClick('05',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('05',7)" onmouseout="rateLeave('05')" onclick="rateClick('05',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('05',8)" onmouseout="rateLeave('05')" onclick="rateClick('05',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('05',9)" onmouseout="rateLeave('05')" onclick="rateClick('05',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('05',10)" onmouseout="rateLeave('05')" onclick="rateClick('05',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-05">-</span>
+          <span class="rate-avg" id="rateavg-05"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','05','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','05','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','05','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-05"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-06" data-cid="06" data-idx="5">
+      <div class="card__media">
+        <div class="badge">CORTE 06 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-06"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-06.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-06.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 27:52 a 29:11</span>
+          <span class="chip">79s</span>
+          <span class="chip chip--tag">Clientes / filtro</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1672);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1751);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Negocio que comeca torto acaba torto</h3>
+        <p class="card__desc">Por que ele nao forca venda e o cliente que quis mudar a clausula do contrato.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'06')">copiar</button></div>
+          <p class="legenda" id="leg-06">O cara quis que eu trocasse a clausula do contrato pra fechar. Pode ir embora, sinto muito. Negocio que comeca torto acaba torto. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Opiniao forte sobre filtrar cliente, gera identificacao.</p></div>
+        <div class="rating" id="rate-06">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('06',2)" onmouseout="rateLeave('06')" onclick="rateClick('06',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('06',3)" onmouseout="rateLeave('06')" onclick="rateClick('06',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('06',4)" onmouseout="rateLeave('06')" onclick="rateClick('06',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('06',5)" onmouseout="rateLeave('06')" onclick="rateClick('06',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('06',6)" onmouseout="rateLeave('06')" onclick="rateClick('06',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('06',7)" onmouseout="rateLeave('06')" onclick="rateClick('06',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('06',8)" onmouseout="rateLeave('06')" onclick="rateClick('06',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('06',9)" onmouseout="rateLeave('06')" onclick="rateClick('06',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('06',10)" onmouseout="rateLeave('06')" onclick="rateClick('06',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-06">-</span>
+          <span class="rate-avg" id="rateavg-06"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','06','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','06','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','06','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-06"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-07" data-cid="07" data-idx="6">
+      <div class="card__media">
+        <div class="badge">CORTE 07 </div>
+        <div class="rank" id="rank-07"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-07.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-07.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 33:14 a 34:12</span>
+          <span class="chip">58s</span>
+          <span class="chip chip--tag">Historia / garantia</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1994);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(2052);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">A bolha do pneu que quebrou o argumento</h3>
+        <p class="card__desc">O cliente que queria garantia de amortecedor e a prova que derrubou a conversa.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'07')">copiar</button></div>
+          <p class="legenda" id="leg-07">Queria garantia de amortecedor 60 dias depois. Ai eu mostrei a bolha no pneu dele. O argumento quebrou junto. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Humor + como lidar com reclamacao sem fundamento.</p></div>
+        <div class="rating" id="rate-07">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('07',2)" onmouseout="rateLeave('07')" onclick="rateClick('07',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('07',3)" onmouseout="rateLeave('07')" onclick="rateClick('07',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('07',4)" onmouseout="rateLeave('07')" onclick="rateClick('07',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('07',5)" onmouseout="rateLeave('07')" onclick="rateClick('07',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('07',6)" onmouseout="rateLeave('07')" onclick="rateClick('07',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('07',7)" onmouseout="rateLeave('07')" onclick="rateClick('07',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('07',8)" onmouseout="rateLeave('07')" onclick="rateClick('07',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('07',9)" onmouseout="rateLeave('07')" onclick="rateClick('07',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('07',10)" onmouseout="rateLeave('07')" onclick="rateClick('07',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-07">-</span>
+          <span class="rate-avg" id="rateavg-07"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','07','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','07','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','07','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-07"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-08" data-cid="08" data-idx="7">
+      <div class="card__media">
+        <div class="badge">CORTE 08 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-08"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-08.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-08.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 48:36 a 49:11</span>
+          <span class="chip">35s</span>
+          <span class="chip chip--tag">Mercado</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(2916);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(2951);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">O carro chines vai virar o jogo</h3>
+        <p class="card__desc">A previsao do que o carro chines faz com o preco do seminovo.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'08')">copiar</button></div>
+          <p class="legenda" id="leg-08">Com o carro chines vindo com tudo, a gente vai voltar a comprar 20% abaixo da FIPE, como era antigamente. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Analise de mercado atual, alto interesse do nicho.</p></div>
+        <div class="rating" id="rate-08">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('08',2)" onmouseout="rateLeave('08')" onclick="rateClick('08',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('08',3)" onmouseout="rateLeave('08')" onclick="rateClick('08',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('08',4)" onmouseout="rateLeave('08')" onclick="rateClick('08',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('08',5)" onmouseout="rateLeave('08')" onclick="rateClick('08',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('08',6)" onmouseout="rateLeave('08')" onclick="rateClick('08',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('08',7)" onmouseout="rateLeave('08')" onclick="rateClick('08',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('08',8)" onmouseout="rateLeave('08')" onclick="rateClick('08',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('08',9)" onmouseout="rateLeave('08')" onclick="rateClick('08',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('08',10)" onmouseout="rateLeave('08')" onclick="rateClick('08',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-08">-</span>
+          <span class="rate-avg" id="rateavg-08"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','08','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','08','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','08','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-08"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-09" data-cid="09" data-idx="8">
+      <div class="card__media">
+        <div class="badge">CORTE 09 </div>
+        <div class="rank" id="rank-09"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-09.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-09.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 53:38 a 54:31</span>
+          <span class="chip">53s</span>
+          <span class="chip chip--tag">Diferencial / detalhe</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3218);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3271);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Sou tao chato que lavo o carro por baixo</h3>
+        <p class="card__desc">O cuidado extra que vira argumento de venda pra cliente de fora.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'09')">copiar</button></div>
+          <p class="legenda" id="leg-09">Mando lavar o carro por baixo com agua quente. Custa 200 reais a mais, mas quando o cliente de fora pede o video, ta tudo limpo. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Detalhe de obsessao por qualidade, encanta.</p></div>
+        <div class="rating" id="rate-09">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('09',2)" onmouseout="rateLeave('09')" onclick="rateClick('09',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('09',3)" onmouseout="rateLeave('09')" onclick="rateClick('09',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('09',4)" onmouseout="rateLeave('09')" onclick="rateClick('09',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('09',5)" onmouseout="rateLeave('09')" onclick="rateClick('09',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('09',6)" onmouseout="rateLeave('09')" onclick="rateClick('09',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('09',7)" onmouseout="rateLeave('09')" onclick="rateClick('09',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('09',8)" onmouseout="rateLeave('09')" onclick="rateClick('09',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('09',9)" onmouseout="rateLeave('09')" onclick="rateClick('09',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('09',10)" onmouseout="rateLeave('09')" onclick="rateClick('09',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-09">-</span>
+          <span class="rate-avg" id="rateavg-09"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','09','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','09','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','09','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-09"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-10" data-cid="10" data-idx="9">
+      <div class="card__media">
+        <div class="badge">CORTE 10 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-10"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-10.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-10.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 54:57 a 56:11</span>
+          <span class="chip">74s</span>
+          <span class="chip chip--tag">Negociacao / dica</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3297);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3371);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Nunca pegue sinal de mil reais</h3>
+        <p class="card__desc">Por que o sinal tem que ser 10% (arras) e nao mil ou dois mil.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'10')">copiar</button></div>
+          <p class="legenda" id="leg-10">Sinal de mil, dois mil nao vale nada. Tem que ser 10%, que e arras: se o cliente desistir, ele perde. Acaba com a dor de cabeca. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Dica pratica e acionavel de negociacao, muito salvavel.</p></div>
+        <div class="rating" id="rate-10">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('10',2)" onmouseout="rateLeave('10')" onclick="rateClick('10',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('10',3)" onmouseout="rateLeave('10')" onclick="rateClick('10',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('10',4)" onmouseout="rateLeave('10')" onclick="rateClick('10',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('10',5)" onmouseout="rateLeave('10')" onclick="rateClick('10',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('10',6)" onmouseout="rateLeave('10')" onclick="rateClick('10',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('10',7)" onmouseout="rateLeave('10')" onclick="rateClick('10',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('10',8)" onmouseout="rateLeave('10')" onclick="rateClick('10',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('10',9)" onmouseout="rateLeave('10')" onclick="rateClick('10',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('10',10)" onmouseout="rateLeave('10')" onclick="rateClick('10',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-10">-</span>
+          <span class="rate-avg" id="rateavg-10"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','10','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','10','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','10','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-10"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-11" data-cid="11" data-idx="10">
+      <div class="card__media">
+        <div class="badge">CORTE 11 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-11"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-11.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-11.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 63:30 a 65:45</span>
+          <span class="chip">135s</span>
+          <span class="chip chip--tag">Historia / reputacao</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3810);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3945);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">A mulher da bateria e a internet</h3>
+        <p class="card__desc">Um comentario de ma-fe no Google e como ele virou o jogo com prova.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'11')">copiar</button></div>
+          <p class="legenda" id="leg-11">Ela mentiu sobre o preco da bateria num comentario no Google. Eu provei a mentira e ela apagou. A internet deu voz aos imbecis. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Historia com virada + tema universal de reputacao online, alto potencial viral.</p></div>
+        <div class="rating" id="rate-11">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('11',2)" onmouseout="rateLeave('11')" onclick="rateClick('11',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('11',3)" onmouseout="rateLeave('11')" onclick="rateClick('11',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('11',4)" onmouseout="rateLeave('11')" onclick="rateClick('11',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('11',5)" onmouseout="rateLeave('11')" onclick="rateClick('11',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('11',6)" onmouseout="rateLeave('11')" onclick="rateClick('11',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('11',7)" onmouseout="rateLeave('11')" onclick="rateClick('11',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('11',8)" onmouseout="rateLeave('11')" onclick="rateClick('11',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('11',9)" onmouseout="rateLeave('11')" onclick="rateClick('11',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('11',10)" onmouseout="rateLeave('11')" onclick="rateClick('11',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-11">-</span>
+          <span class="rate-avg" id="rateavg-11"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','11','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','11','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','11','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-11"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-12" data-cid="12" data-idx="11">
+      <div class="card__media">
+        <div class="badge">CORTE 12 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-12"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-12.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-12.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 68:00 a 68:48</span>
+          <span class="chip">48s</span>
+          <span class="chip chip--tag">Vendas / follow-up</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4080);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4128);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">18 tentativas em cima do mesmo lead</h3>
+        <p class="card__desc">A insistencia certa: variar horario ate o cliente responder.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'12')">copiar</button></div>
+          <p class="legenda" id="leg-12">Nao respondeu de manha? Tenta as 10, meio-dia, 16h, 20h, sabado, domingo. Sao 18 tentativas ate o cliente responder. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Aula de follow-up, acionavel pra qualquer vendedor.</p></div>
+        <div class="rating" id="rate-12">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('12',2)" onmouseout="rateLeave('12')" onclick="rateClick('12',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('12',3)" onmouseout="rateLeave('12')" onclick="rateClick('12',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('12',4)" onmouseout="rateLeave('12')" onclick="rateClick('12',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('12',5)" onmouseout="rateLeave('12')" onclick="rateClick('12',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('12',6)" onmouseout="rateLeave('12')" onclick="rateClick('12',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('12',7)" onmouseout="rateLeave('12')" onclick="rateClick('12',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('12',8)" onmouseout="rateLeave('12')" onclick="rateClick('12',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('12',9)" onmouseout="rateLeave('12')" onclick="rateClick('12',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('12',10)" onmouseout="rateLeave('12')" onclick="rateClick('12',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-12">-</span>
+          <span class="rate-avg" id="rateavg-12"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','12','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','12','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','12','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-12"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-13" data-cid="13" data-idx="12">
+      <div class="card__media">
+        <div class="badge">CORTE 13 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-13"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-13.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-13.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 71:41 a 72:16</span>
+          <span class="chip">35s</span>
+          <span class="chip chip--tag">Valores / conselho</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4301);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4336);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Dinheiro nao leva a desaforo</h3>
+        <p class="card__desc">O que ele responde quando perguntam o segredo do sucesso.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'13')">copiar</button></div>
+          <p class="legenda" id="leg-13">O segredo e um so: honestidade. Se voce trabalha certo, nao tem como dar errado. E dinheiro nao leva a desaforo. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Frase de valor citavel, autoridade moral.</p></div>
+        <div class="rating" id="rate-13">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('13',2)" onmouseout="rateLeave('13')" onclick="rateClick('13',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('13',3)" onmouseout="rateLeave('13')" onclick="rateClick('13',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('13',4)" onmouseout="rateLeave('13')" onclick="rateClick('13',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('13',5)" onmouseout="rateLeave('13')" onclick="rateClick('13',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('13',6)" onmouseout="rateLeave('13')" onclick="rateClick('13',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('13',7)" onmouseout="rateLeave('13')" onclick="rateClick('13',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('13',8)" onmouseout="rateLeave('13')" onclick="rateClick('13',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('13',9)" onmouseout="rateLeave('13')" onclick="rateClick('13',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('13',10)" onmouseout="rateLeave('13')" onclick="rateClick('13',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-13">-</span>
+          <span class="rate-avg" id="rateavg-13"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','13','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','13','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','13','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-13"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-14" data-cid="14" data-idx="13">
+      <div class="card__media">
+        <div class="badge">CORTE 14 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-14"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-14.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-14.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 74:26 a 75:30</span>
+          <span class="chip">64s</span>
+          <span class="chip chip--tag">Mentalidade / dinheiro</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4466);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4530);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Nao compra jet, reinveste na loja</h3>
+        <p class="card__desc">O erro de quem ganha o primeiro dinheiro e ja quer aparecer.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'14')">copiar</button></div>
+          <p class="legenda" id="leg-14">O dinheiro do jetski dava pra comprar dois carros. O cara ganha um pouco e ja quer lancha e SW4. Reinveste na loja primeiro. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Mentalidade de dono, quebra a cultura do ego.</p></div>
+        <div class="rating" id="rate-14">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('14',2)" onmouseout="rateLeave('14')" onclick="rateClick('14',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('14',3)" onmouseout="rateLeave('14')" onclick="rateClick('14',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('14',4)" onmouseout="rateLeave('14')" onclick="rateClick('14',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('14',5)" onmouseout="rateLeave('14')" onclick="rateClick('14',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('14',6)" onmouseout="rateLeave('14')" onclick="rateClick('14',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('14',7)" onmouseout="rateLeave('14')" onclick="rateClick('14',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('14',8)" onmouseout="rateLeave('14')" onclick="rateClick('14',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('14',9)" onmouseout="rateLeave('14')" onclick="rateClick('14',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('14',10)" onmouseout="rateLeave('14')" onclick="rateClick('14',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-14">-</span>
+          <span class="rate-avg" id="rateavg-14"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','14','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','14','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','14','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-14"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card" id="card-15" data-cid="15" data-idx="14">
+      <div class="card__media">
+        <div class="badge">CORTE 15 <span class="star">&#9733;</span></div>
+        <div class="rank" id="rank-15"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-15.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/corte-15.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 80:40 a 81:16</span>
+          <span class="chip">36s</span>
+          <span class="chip chip--tag">Estrategia / conselho</span>
+          <span class="chip chip--cru">corte cru &middot; edição final depois</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4840);return false;" title="Ver onde esse corte COMEÇA no vídeo original">&#9654; início no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4876);return false;" title="Ver onde esse corte TERMINA no vídeo original">&#9197; fim no completo</a>
+        </div>
+        <h3 class="card__title">Melhor um pequeno forte que um grande bobalhao</h3>
+        <p class="card__desc">A filosofia dele sobre crescer com pe no chao.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'15')">copiar</button></div>
+          <p class="legenda" id="leg-15">Melhor ser um pequeno forte do que um grande bobalhao se exibindo. Cresce com o pe no chao. @repassepodcast</p></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div><p>Frase citavel, fecha com sabedoria de negocio.</p></div>
+        <div class="rating" id="rate-15">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('15',2)" onmouseout="rateLeave('15')" onclick="rateClick('15',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('15',3)" onmouseout="rateLeave('15')" onclick="rateClick('15',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('15',4)" onmouseout="rateLeave('15')" onclick="rateClick('15',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('15',5)" onmouseout="rateLeave('15')" onclick="rateClick('15',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('15',6)" onmouseout="rateLeave('15')" onclick="rateClick('15',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('15',7)" onmouseout="rateLeave('15')" onclick="rateClick('15',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('15',8)" onmouseout="rateLeave('15')" onclick="rateClick('15',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('15',9)" onmouseout="rateLeave('15')" onclick="rateClick('15',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('15',10)" onmouseout="rateLeave('15')" onclick="rateClick('15',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-15">-</span>
+          <span class="rate-avg" id="rateavg-15"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','15','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','15','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','15','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-15"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article></div>
+  <div class="section-title"><span>Conteudo longo para YouTube (8 a 10 min)</span><div class="line"></div></div><p class="sec-note">Blocos de 8 a 10 minutos pra publicar direto no YouTube. Cada um e uma janela continua (toca inteiro, sem edicao por dentro), com gancho de abertura, opcoes de titulo e os pontos de thumbnail e de anuncio (mid-roll). Avalie e de nota igual aos cortes.</p><div class="grid grid-blocos">
+    <article class="card card--bloco" id="card-b01" data-cid="b01" data-idx="0">
+      <div class="card__media">
+        <div class="badge badge--yt">&#9654; YOUTUBE B01</div>
+        <div class="rank" id="rank-b01"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-b01.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/bloco-01.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 01:28 a 09:32</span>
+          <span class="chip chip--dur">&#9654; 8:04</span>
+          <span class="chip chip--tag">Trajetoria</span>
+          <span class="chip chip--score">nota do analista 8.5/10</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(88);return false;" title="Ver onde o bloco COMECA no video original">&#9654; inicio no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(572);return false;" title="Ver onde o bloco TERMINA no video original">&#9197; fim no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(400);return false;" title="Ver o momento sugerido de thumbnail">&#128247; thumbnail </a>
+        </div>
+        <h3 class="card__title">De lavar motor a HM Premium</h3>
+        <div class="block block--hook">
+          <div class="block__head"><span>Gancho de abertura</span></div>
+          <p class="hook">&ldquo;Comecei aos 14 lavando motor com escovinha de dente.&rdquo;</p>
+          <p class="hook-why">Contraste entre o comeco humilde e a loja premium de hoje prende na hora.</p></div>
+        <div class="block block--titulos">
+          <div class="block__head"><span>Opcoes de titulo</span></div>
+          <ol class="titulos"><li>De lavar motor com escovinha a dono de loja premium</li><li>A historia do Caju: 35 anos de estrada no ramo de carros</li><li>Do Miguel Automoveis a HM Premium: como tudo comecou</li></ol></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Resumo</span></div><p>A trajetoria completa: o pai rigido, a sociedade com o irmao, os anos no Mundo Ocar, a virada com a esposa e a loja propria.</p></div>
+        <div class="bloco-tec">
+          <span class="chip chip--mid">&#9208; Mid-roll sugerido: 05:40</span>
+          <span class="chip chip--warn">&#9888; []</span>
+        </div>
+        <div class="rating" id="rate-b01">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('b01',2)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('b01',3)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('b01',4)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('b01',5)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('b01',6)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('b01',7)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('b01',8)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('b01',9)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('b01',10)" onmouseout="rateLeave('b01')" onclick="rateClick('b01',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-b01">-</span>
+          <span class="rate-avg" id="rateavg-b01"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','b01','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','b01','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','b01','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-b01"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card card--bloco" id="card-b02" data-cid="b02" data-idx="1">
+      <div class="card__media">
+        <div class="badge badge--yt">&#9654; YOUTUBE B02</div>
+        <div class="rank" id="rank-b02"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-b02.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/bloco-02.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 14:16 a 22:55</span>
+          <span class="chip chip--dur">&#9654; 8:39</span>
+          <span class="chip chip--tag">Mercado / processo</span>
+          <span class="chip chip--score">nota do analista 9.0/10</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(856);return false;" title="Ver onde o bloco COMECA no video original">&#9654; inicio no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1375);return false;" title="Ver onde o bloco TERMINA no video original">&#9197; fim no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(856);return false;" title="Ver o momento sugerido de thumbnail">&#128247; thumbnail </a>
+        </div>
+        <h3 class="card__title">A verdade do mercado: KM, cautelar e transparencia</h3>
+        <div class="block block--hook">
+          <div class="block__head"><span>Gancho de abertura</span></div>
+          <p class="hook">&ldquo;O brasileiro gosta de ser enganado.&rdquo;</p>
+          <p class="hook-why">Afirmacao provocadora que abre loop e divide opiniao.</p></div>
+        <div class="block block--titulos">
+          <div class="block__head"><span>Opcoes de titulo</span></div>
+          <ol class="titulos"><li>A verdade sobre a quilometragem que ninguem conta</li><li>Como blindar sua loja de carro contra problema</li><li>Adulteracao de KM, cautelar e transparencia no repasse</li></ol></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Resumo</span></div><p>A critica a adulteracao de quilometragem, a solucao pro Detran, por que KM nao e tudo e o uso da cautelar como blindagem.</p></div>
+        <div class="bloco-tec">
+          <span class="chip chip--mid">&#9208; Mid-roll sugerido: 18:30</span>
+          <span class="chip chip--warn">&#9888; []</span>
+        </div>
+        <div class="rating" id="rate-b02">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('b02',2)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('b02',3)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('b02',4)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('b02',5)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('b02',6)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('b02',7)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('b02',8)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('b02',9)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('b02',10)" onmouseout="rateLeave('b02')" onclick="rateClick('b02',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-b02">-</span>
+          <span class="rate-avg" id="rateavg-b02"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','b02','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','b02','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','b02','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-b02"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card card--bloco" id="card-b03" data-cid="b03" data-idx="2">
+      <div class="card__media">
+        <div class="badge badge--yt">&#9654; YOUTUBE B03</div>
+        <div class="rank" id="rank-b03"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-b03.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/bloco-03.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 27:35 a 36:10</span>
+          <span class="chip chip--dur">&#9654; 8:35</span>
+          <span class="chip chip--tag">Clientes / atendimento</span>
+          <span class="chip chip--score">nota do analista 8.9/10</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1655);return false;" title="Ver onde o bloco COMECA no video original">&#9654; inicio no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(2170);return false;" title="Ver onde o bloco TERMINA no video original">&#9197; fim no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1751);return false;" title="Ver o momento sugerido de thumbnail">&#128247; thumbnail </a>
+        </div>
+        <h3 class="card__title">Os clientes que ele demitiu (e os que ele ama)</h3>
+        <div class="block block--hook">
+          <div class="block__head"><span>Gancho de abertura</span></div>
+          <p class="hook">&ldquo;Ja demitiu algum cliente? Varias vezes.&rdquo;</p>
+          <p class="hook-why">Admissao direta e contraintuitiva sobre recusar cliente, gera curiosidade.</p></div>
+        <div class="block block--titulos">
+          <div class="block__head"><span>Opcoes de titulo</span></div>
+          <ol class="titulos"><li>Os clientes que eu ja botei pra fora da loja</li><li>Quando demitir um cliente e o melhor negocio</li><li>Cliente que da trabalho x cliente que ilumina a loja</li></ol></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Resumo</span></div><p>Historias reais de clientes que ele recusou, o golpe que quase virou briga, e o outro lado: os clientes que valem ouro.</p></div>
+        <div class="bloco-tec">
+          <span class="chip chip--mid">&#9208; Mid-roll sugerido: 31:40</span>
+          <span class="chip chip--warn">&#9888; []</span>
+        </div>
+        <div class="rating" id="rate-b03">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('b03',2)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('b03',3)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('b03',4)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('b03',5)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('b03',6)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('b03',7)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('b03',8)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('b03',9)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('b03',10)" onmouseout="rateLeave('b03')" onclick="rateClick('b03',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-b03">-</span>
+          <span class="rate-avg" id="rateavg-b03"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','b03','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','b03','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','b03','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-b03"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card card--bloco" id="card-b04" data-cid="b04" data-idx="3">
+      <div class="card__media">
+        <div class="badge badge--yt">&#9654; YOUTUBE B04</div>
+        <div class="rank" id="rank-b04"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-b04.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/bloco-04.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 52:36 a 61:00</span>
+          <span class="chip chip--dur">&#9654; 8:24</span>
+          <span class="chip chip--tag">Negociacao</span>
+          <span class="chip chip--score">nota do analista 8.7/10</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3156);return false;" title="Ver onde o bloco COMECA no video original">&#9654; inicio no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3660);return false;" title="Ver onde o bloco TERMINA no video original">&#9197; fim no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3297);return false;" title="Ver o momento sugerido de thumbnail">&#128247; thumbnail </a>
+        </div>
+        <h3 class="card__title">O sinal de 10%: a arte de fechar sem tomar cano</h3>
+        <div class="block block--hook">
+          <div class="block__head"><span>Gancho de abertura</span></div>
+          <p class="hook">&ldquo;Uma dica pra acabar com o problema de todas as lojas.&rdquo;</p>
+          <p class="hook-why">Promessa de solucao pratica que todo lojista quer ouvir.</p></div>
+        <div class="block block--titulos">
+          <div class="block__head"><span>Opcoes de titulo</span></div>
+          <ol class="titulos"><li>O erro do sinal que faz voce perder venda</li><li>Sinal de 10%: como fechar sem tomar cano</li><li>A regra de ouro pra nao segurar carro a toa</li></ol></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Resumo</span></div><p>Por que o sinal tem que ser 10% de arras, com varias historias de clientes que sumiram e o que isso ensina.</p></div>
+        <div class="bloco-tec">
+          <span class="chip chip--mid">&#9208; Mid-roll sugerido: 57:00</span>
+          <span class="chip chip--warn">&#9888; []</span>
+        </div>
+        <div class="rating" id="rate-b04">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('b04',2)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('b04',3)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('b04',4)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('b04',5)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('b04',6)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('b04',7)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('b04',8)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('b04',9)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('b04',10)" onmouseout="rateLeave('b04')" onclick="rateClick('b04',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-b04">-</span>
+          <span class="rate-avg" id="rateavg-b04"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','b04','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','b04','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','b04','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-b04"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article>
+
+    <article class="card card--bloco" id="card-b05" data-cid="b05" data-idx="4">
+      <div class="card__media">
+        <div class="badge badge--yt">&#9654; YOUTUBE B05</div>
+        <div class="rank" id="rank-b05"></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-caju/videos/poster-b05.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-caju/videos/bloco-05.mp4" type="video/mp4"></video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 72:44 a 81:16</span>
+          <span class="chip chip--dur">&#9654; 8:32</span>
+          <span class="chip chip--tag">Empreendedorismo</span>
+          <span class="chip chip--score">nota do analista 8.6/10</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4364);return false;" title="Ver onde o bloco COMECA no video original">&#9654; inicio no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4876);return false;" title="Ver onde o bloco TERMINA no video original">&#9197; fim no completo</a>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4466);return false;" title="Ver o momento sugerido de thumbnail">&#128247; thumbnail </a>
+        </div>
+        <h3 class="card__title">Conselho pra quem quer abrir loja de carro</h3>
+        <div class="block block--hook">
+          <div class="block__head"><span>Gancho de abertura</span></div>
+          <p class="hook">&ldquo;Um milhao, so de carro, pra comecar.&rdquo;</p>
+          <p class="hook-why">Numero concreto e direto que responde a duvida de todo aspirante a lojista.</p></div>
+        <div class="block block--titulos">
+          <div class="block__head"><span>Opcoes de titulo</span></div>
+          <ol class="titulos"><li>Quanto custa pra abrir uma loja de carro de verdade</li><li>O conselho pra quem quer viver de carro</li><li>Reinveste na loja: o erro do jet e da lancha</li></ol></div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Resumo</span></div><p>O capital real pra comecar, o erro de gastar com ego, o valor de se juntar a um parceiro e a filosofia do pequeno forte.</p></div>
+        <div class="bloco-tec">
+          <span class="chip chip--mid">&#9208; Mid-roll sugerido: 77:00</span>
+          <span class="chip chip--warn">&#9888; []</span>
+        </div>
+        <div class="rating" id="rate-b05">
+          <span class="rate-lbl">Sua nota <small>(2 a 10)</small></span>
+          <span class="stars"><i class="rstar" data-n="2" onmouseover="rateHover('b05',2)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',2)" title="nota 2">&#9733;</i><i class="rstar" data-n="3" onmouseover="rateHover('b05',3)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',3)" title="nota 3">&#9733;</i><i class="rstar" data-n="4" onmouseover="rateHover('b05',4)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',4)" title="nota 4">&#9733;</i><i class="rstar" data-n="5" onmouseover="rateHover('b05',5)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',5)" title="nota 5">&#9733;</i><i class="rstar" data-n="6" onmouseover="rateHover('b05',6)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',6)" title="nota 6">&#9733;</i><i class="rstar" data-n="7" onmouseover="rateHover('b05',7)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',7)" title="nota 7">&#9733;</i><i class="rstar" data-n="8" onmouseover="rateHover('b05',8)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',8)" title="nota 8">&#9733;</i><i class="rstar" data-n="9" onmouseover="rateHover('b05',9)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',9)" title="nota 9">&#9733;</i><i class="rstar" data-n="10" onmouseover="rateHover('b05',10)" onmouseout="rateLeave('b05')" onclick="rateClick('b05',10)" title="nota 10">&#9733;</i></span>
+          <span class="rate-big" id="ratebig-b05">-</span>
+          <span class="rate-avg" id="rateavg-b05"></span>
+        </div>
+        <div class="decisao">
+          <button type="button" class="btn btn--ok"  onclick="abrir('corte','b05','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" onclick="abrir('corte','b05','alteracoes')">&#9998; Pedir alterações</button>
+          <button type="button" class="btn btn--no"  onclick="abrir('corte','b05','reprovado')">&#10007; Reprovar</button>
+        </div>
+        <div class="feed" id="feed-b05"><div class="feed-empty">nenhuma avaliação ainda</div></div>
+      </div>
+    </article></div>
+</main>
+<footer>Página de validação de cortes &middot; MediaGrowth</footer>
+
+<div class="modal" id="modal"><div class="modal__box">
+  <div class="modal__title" id="mTitle">Avaliar</div>
+  <p class="modal__msg" id="mMsg"></p>
+  <label>Seu nome<input id="mNome" type="text" placeholder="Ex.: Igor, Junior, David..."></label>
+  <label><span id="mObsLabel">Observação</span><textarea id="mObs" rows="3"></textarea></label>
+  <p class="modal__cru">É um <b>corte cru</b>, sem edição. Aqui você aprova o <b>conteúdo / o trecho</b>. A edição final (vertical, legendas, ajustes) vem depois. <b>Não é o corte final.</b></p>
+  <div class="modal__actions"><button class="m-cancel" onclick="fechar()">Cancelar</button><button class="m-ok" id="mSalvar" onclick="salvar()">Salvar</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const DADOS={"projeto": "Cortes: Podcast Henrique Caju (HM Premium)", "cliente": "Repasse Podcast", "episodio": "Henrique Caju · HM Premium", "slug": "repasse-caju", "modo": "feed", "repo": "mediagrowthmkt-debug/repasse-podcast", "fonte": "PODCAST CAJU.mov", "duracao_total": "87:21", "cortes": [{"id": "01", "arquivo": "videos/corte-01.mp4", "poster": "videos/poster-01.jpg", "titulo": "Comecei lavando motor com escovinha de dente", "assunto": "Trajetoria", "destaque": false, "inicio": "01:32", "fim": "02:18", "inicio_sec": 92, "dur_sec": 46, "duracao": "46s", "descricao": "O comeco na loja do pai, aos 14 anos, na base do sacrificio.", "legenda": "Antes da loja premium, era escovinha de dente pra lavar motor aos 14 anos. Todo imperio comeca em algum lugar. @repassepodcast", "motivo": "Abertura de historia, humildade e identificacao."}, {"id": "02", "arquivo": "videos/corte-02.mp4", "poster": "videos/poster-02.jpg", "titulo": "O golpe que custou quase 5 milhoes", "assunto": "Historia / alerta", "destaque": true, "inicio": "06:39", "fim": "07:53", "inicio_sec": 399, "dur_sec": 74, "duracao": "74s", "descricao": "Um ex-gerente montou loja, todo mundo consignou e ele sumiu com tudo.", "legenda": "O cara foi nosso gerente, montou a propria loja, todo mundo confiou e um dia sumiu com os carros. O prejuizo daria uns 5 milhoes hoje. @repassepodcast", "motivo": "Drama e curiosidade, alerta real do ramo."}, {"id": "03", "arquivo": "videos/corte-03.mp4", "poster": "videos/poster-03.jpg", "titulo": "Por que so trabalho com carro 2023 pra cima", "assunto": "Estrategia / premium", "destaque": true, "inicio": "11:55", "fim": "13:19", "inicio_sec": 715, "dur_sec": 84, "duracao": "84s", "descricao": "A estrategia de vender so carro na garantia de fabrica e sinalizar isso no anuncio.", "legenda": "Trabalho com carro 2023 pra cima pra todos estarem na garantia de fabrica. Ai a garantia dOi menos no meu bolso e o cliente compra com seguranca. @repassepodcast", "motivo": "Sacada de posicionamento, autoridade pratica."}, {"id": "04", "arquivo": "videos/corte-04.mp4", "poster": "videos/poster-04.jpg", "titulo": "O brasileiro gosta de ser enganado", "assunto": "Opiniao / KM", "destaque": true, "inicio": "14:16", "fim": "15:48", "inicio_sec": 856, "dur_sec": 92, "duracao": "92s", "descricao": "A critica a adulteracao de quilometragem e a solucao simples que ele daria pro Detran.", "legenda": "Baixar quilometragem e a folia do mercado. E acabaria facil: no licenciamento, foto do velocimetro com a KM real. Simples assim. @repassepodcast", "motivo": "Opiniao polemica + solucao util, gera muito comentario."}, {"id": "05", "arquivo": "videos/corte-05.mp4", "poster": "videos/poster-05.jpg", "titulo": "Cautelar em todo carro, sem excecao", "assunto": "Processo / blindagem", "destaque": true, "inicio": "21:49", "fim": "23:00", "inicio_sec": 1309, "dur_sec": 71, "duracao": "71s", "descricao": "Por que ele faz vistoria cautelar em cada carro que entra, ate num Fusca.", "legenda": "Todo carro que entra na minha loja faz cautelar, sem excecao, pode ser um Fusca. E ali ja acaba com 90% dos problemas. @repassepodcast", "motivo": "Dica de processo que blinda a loja, autoridade."}, {"id": "06", "arquivo": "videos/corte-06.mp4", "poster": "videos/poster-06.jpg", "titulo": "Negocio que comeca torto acaba torto", "assunto": "Clientes / filtro", "destaque": true, "inicio": "27:52", "fim": "29:11", "inicio_sec": 1672, "dur_sec": 79, "duracao": "79s", "descricao": "Por que ele nao forca venda e o cliente que quis mudar a clausula do contrato.", "legenda": "O cara quis que eu trocasse a clausula do contrato pra fechar. Pode ir embora, sinto muito. Negocio que comeca torto acaba torto. @repassepodcast", "motivo": "Opiniao forte sobre filtrar cliente, gera identificacao."}, {"id": "07", "arquivo": "videos/corte-07.mp4", "poster": "videos/poster-07.jpg", "titulo": "A bolha do pneu que quebrou o argumento", "assunto": "Historia / garantia", "destaque": false, "inicio": "33:14", "fim": "34:12", "inicio_sec": 1994, "dur_sec": 58, "duracao": "58s", "descricao": "O cliente que queria garantia de amortecedor e a prova que derrubou a conversa.", "legenda": "Queria garantia de amortecedor 60 dias depois. Ai eu mostrei a bolha no pneu dele. O argumento quebrou junto. @repassepodcast", "motivo": "Humor + como lidar com reclamacao sem fundamento."}, {"id": "08", "arquivo": "videos/corte-08.mp4", "poster": "videos/poster-08.jpg", "titulo": "O carro chines vai virar o jogo", "assunto": "Mercado", "destaque": true, "inicio": "48:36", "fim": "49:11", "inicio_sec": 2916, "dur_sec": 35, "duracao": "35s", "descricao": "A previsao do que o carro chines faz com o preco do seminovo.", "legenda": "Com o carro chines vindo com tudo, a gente vai voltar a comprar 20% abaixo da FIPE, como era antigamente. @repassepodcast", "motivo": "Analise de mercado atual, alto interesse do nicho."}, {"id": "09", "arquivo": "videos/corte-09.mp4", "poster": "videos/poster-09.jpg", "titulo": "Sou tao chato que lavo o carro por baixo", "assunto": "Diferencial / detalhe", "destaque": false, "inicio": "53:38", "fim": "54:31", "inicio_sec": 3218, "dur_sec": 53, "duracao": "53s", "descricao": "O cuidado extra que vira argumento de venda pra cliente de fora.", "legenda": "Mando lavar o carro por baixo com agua quente. Custa 200 reais a mais, mas quando o cliente de fora pede o video, ta tudo limpo. @repassepodcast", "motivo": "Detalhe de obsessao por qualidade, encanta."}, {"id": "10", "arquivo": "videos/corte-10.mp4", "poster": "videos/poster-10.jpg", "titulo": "Nunca pegue sinal de mil reais", "assunto": "Negociacao / dica", "destaque": true, "inicio": "54:57", "fim": "56:11", "inicio_sec": 3297, "dur_sec": 74, "duracao": "74s", "descricao": "Por que o sinal tem que ser 10% (arras) e nao mil ou dois mil.", "legenda": "Sinal de mil, dois mil nao vale nada. Tem que ser 10%, que e arras: se o cliente desistir, ele perde. Acaba com a dor de cabeca. @repassepodcast", "motivo": "Dica pratica e acionavel de negociacao, muito salvavel."}, {"id": "11", "arquivo": "videos/corte-11.mp4", "poster": "videos/poster-11.jpg", "titulo": "A mulher da bateria e a internet", "assunto": "Historia / reputacao", "destaque": true, "inicio": "63:30", "fim": "65:45", "inicio_sec": 3810, "dur_sec": 135, "duracao": "135s", "descricao": "Um comentario de ma-fe no Google e como ele virou o jogo com prova.", "legenda": "Ela mentiu sobre o preco da bateria num comentario no Google. Eu provei a mentira e ela apagou. A internet deu voz aos imbecis. @repassepodcast", "motivo": "Historia com virada + tema universal de reputacao online, alto potencial viral."}, {"id": "12", "arquivo": "videos/corte-12.mp4", "poster": "videos/poster-12.jpg", "titulo": "18 tentativas em cima do mesmo lead", "assunto": "Vendas / follow-up", "destaque": true, "inicio": "68:00", "fim": "68:48", "inicio_sec": 4080, "dur_sec": 48, "duracao": "48s", "descricao": "A insistencia certa: variar horario ate o cliente responder.", "legenda": "Nao respondeu de manha? Tenta as 10, meio-dia, 16h, 20h, sabado, domingo. Sao 18 tentativas ate o cliente responder. @repassepodcast", "motivo": "Aula de follow-up, acionavel pra qualquer vendedor."}, {"id": "13", "arquivo": "videos/corte-13.mp4", "poster": "videos/poster-13.jpg", "titulo": "Dinheiro nao leva a desaforo", "assunto": "Valores / conselho", "destaque": true, "inicio": "71:41", "fim": "72:16", "inicio_sec": 4301, "dur_sec": 35, "duracao": "35s", "descricao": "O que ele responde quando perguntam o segredo do sucesso.", "legenda": "O segredo e um so: honestidade. Se voce trabalha certo, nao tem como dar errado. E dinheiro nao leva a desaforo. @repassepodcast", "motivo": "Frase de valor citavel, autoridade moral."}, {"id": "14", "arquivo": "videos/corte-14.mp4", "poster": "videos/poster-14.jpg", "titulo": "Nao compra jet, reinveste na loja", "assunto": "Mentalidade / dinheiro", "destaque": true, "inicio": "74:26", "fim": "75:30", "inicio_sec": 4466, "dur_sec": 64, "duracao": "64s", "descricao": "O erro de quem ganha o primeiro dinheiro e ja quer aparecer.", "legenda": "O dinheiro do jetski dava pra comprar dois carros. O cara ganha um pouco e ja quer lancha e SW4. Reinveste na loja primeiro. @repassepodcast", "motivo": "Mentalidade de dono, quebra a cultura do ego."}, {"id": "15", "arquivo": "videos/corte-15.mp4", "poster": "videos/poster-15.jpg", "titulo": "Melhor um pequeno forte que um grande bobalhao", "assunto": "Estrategia / conselho", "destaque": true, "inicio": "80:40", "fim": "81:16", "inicio_sec": 4840, "dur_sec": 36, "duracao": "36s", "descricao": "A filosofia dele sobre crescer com pe no chao.", "legenda": "Melhor ser um pequeno forte do que um grande bobalhao se exibindo. Cresce com o pe no chao. @repassepodcast", "motivo": "Frase citavel, fecha com sabedoria de negocio."}], "blocos": [{"id": "b01", "arquivo": "videos/bloco-01.mp4", "poster": "videos/poster-b01.jpg", "titulo": "De lavar motor a HM Premium", "assunto": "Trajetoria", "inicio": "01:28", "fim": "09:32", "inicio_sec": 88, "dur_sec": 484, "duracao": "8:04", "hook": "Comecei aos 14 lavando motor com escovinha de dente.", "hook_porque": "Contraste entre o comeco humilde e a loja premium de hoje prende na hora.", "titulos": ["De lavar motor com escovinha a dono de loja premium", "A historia do Caju: 35 anos de estrada no ramo de carros", "Do Miguel Automoveis a HM Premium: como tudo comecou"], "thumb_sec": 400, "midroll": "05:40", "midroll_sec": 340, "resumo": "A trajetoria completa: o pai rigido, a sociedade com o irmao, os anos no Mundo Ocar, a virada com a esposa e a loja propria.", "score": 8.5, "flags": []}, {"id": "b02", "arquivo": "videos/bloco-02.mp4", "poster": "videos/poster-b02.jpg", "titulo": "A verdade do mercado: KM, cautelar e transparencia", "assunto": "Mercado / processo", "inicio": "14:16", "fim": "22:55", "inicio_sec": 856, "dur_sec": 519, "duracao": "8:39", "hook": "O brasileiro gosta de ser enganado.", "hook_porque": "Afirmacao provocadora que abre loop e divide opiniao.", "titulos": ["A verdade sobre a quilometragem que ninguem conta", "Como blindar sua loja de carro contra problema", "Adulteracao de KM, cautelar e transparencia no repasse"], "thumb_sec": 856, "midroll": "18:30", "midroll_sec": 1110, "resumo": "A critica a adulteracao de quilometragem, a solucao pro Detran, por que KM nao e tudo e o uso da cautelar como blindagem.", "score": 9.0, "flags": []}, {"id": "b03", "arquivo": "videos/bloco-03.mp4", "poster": "videos/poster-b03.jpg", "titulo": "Os clientes que ele demitiu (e os que ele ama)", "assunto": "Clientes / atendimento", "inicio": "27:35", "fim": "36:10", "inicio_sec": 1655, "dur_sec": 515, "duracao": "8:35", "hook": "Ja demitiu algum cliente? Varias vezes.", "hook_porque": "Admissao direta e contraintuitiva sobre recusar cliente, gera curiosidade.", "titulos": ["Os clientes que eu ja botei pra fora da loja", "Quando demitir um cliente e o melhor negocio", "Cliente que da trabalho x cliente que ilumina a loja"], "thumb_sec": 1751, "midroll": "31:40", "midroll_sec": 1900, "resumo": "Historias reais de clientes que ele recusou, o golpe que quase virou briga, e o outro lado: os clientes que valem ouro.", "score": 8.9, "flags": []}, {"id": "b04", "arquivo": "videos/bloco-04.mp4", "poster": "videos/poster-b04.jpg", "titulo": "O sinal de 10%: a arte de fechar sem tomar cano", "assunto": "Negociacao", "inicio": "52:36", "fim": "61:00", "inicio_sec": 3156, "dur_sec": 504, "duracao": "8:24", "hook": "Uma dica pra acabar com o problema de todas as lojas.", "hook_porque": "Promessa de solucao pratica que todo lojista quer ouvir.", "titulos": ["O erro do sinal que faz voce perder venda", "Sinal de 10%: como fechar sem tomar cano", "A regra de ouro pra nao segurar carro a toa"], "thumb_sec": 3297, "midroll": "57:00", "midroll_sec": 3420, "resumo": "Por que o sinal tem que ser 10% de arras, com varias historias de clientes que sumiram e o que isso ensina.", "score": 8.7, "flags": []}, {"id": "b05", "arquivo": "videos/bloco-05.mp4", "poster": "videos/poster-b05.jpg", "titulo": "Conselho pra quem quer abrir loja de carro", "assunto": "Empreendedorismo", "inicio": "72:44", "fim": "81:16", "inicio_sec": 4364, "dur_sec": 512, "duracao": "8:32", "hook": "Um milhao, so de carro, pra comecar.", "hook_porque": "Numero concreto e direto que responde a duvida de todo aspirante a lojista.", "titulos": ["Quanto custa pra abrir uma loja de carro de verdade", "O conselho pra quem quer viver de carro", "Reinveste na loja: o erro do jet e da lancha"], "thumb_sec": 4466, "midroll": "77:00", "midroll_sec": 4620, "resumo": "O capital real pra comecar, o erro de gastar com ego, o valor de se juntar a um parceiro e a filosofia do pequeno forte.", "score": 8.6, "flags": []}]}; const API="https://mediagrowth.com.br/cortes-api/api.php"; const SLUG="repasse-caju"; const KEY="valida_"+SLUG;
+let estado={full:[],cortes:{}}; let alvoAtual={alvo:'',id:'',decisao:'',nota:0}; let avgs={};
+const TIT={aprovado:'Aprovar',alteracoes:'Pedir alterações',reprovado:'Reprovar',nota:'Dar nota'};
+const TAG={aprovado:'✓ Aprovou',alteracoes:'✎ Pediu alterações',reprovado:'✗ Reprovou',nota:'★ Nota'};
+const CLS={aprovado:'fb--ok',alteracoes:'fb--adj',reprovado:'fb--no',nota:'fb--nota'};
+const DOM={aprovado:'dom-ok',alteracoes:'dom-adj',reprovado:'dom-no'};
+const MSG={
+ aprovado:{msg:'Você está APROVANDO este ALVO. Se quiser, deixe uma observação ou uma referência, ou deixe em branco e libere a edição pra gente. Lembre: é corte cru, a edição final vem depois.',obsLabel:'Observação (opcional)',obsPh:'Ex.: pode seguir assim / uma referência ou ideia. Em branco = liberado pra editar.',btn:'Confirmar aprovação'},
+ alteracoes:{msg:'Você quer ALTERAÇÕES neste ALVO. Conte certinho o que mudar no conteúdo/trecho pra gente acertar na edição.',obsLabel:'O que você quer mudar (recomendado)',obsPh:'Ex.: começar 2s antes, cortar o final, trocar a legenda, mudar a ordem...',btn:'Enviar pedido de alteração'},
+ reprovado:{msg:'Você está REPROVANDO este ALVO. Diga o motivo pra gente entender (não vale a pena usar, fala cortada, etc.).',obsLabel:'Motivo (recomendado)',obsPh:'Ex.: não ficou bom, fala cortada, não faz sentido usar esse trecho...',btn:'Confirmar reprovação'},
+ nota:{msg:'Escreva seu nome pra registrar a sua nota deste corte. O comentário é opcional.',obsLabel:'Comentário (opcional)',obsPh:'Ex.: ótimo trecho, mas cortaria o final...',btn:'Salvar nota'},
+};
+function $(id){return document.getElementById(id);}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1700);}
+function verNoCompleto(sec){const v=$('full');window.scrollTo({top:0,behavior:'smooth'});v.currentTime=sec;v.play().catch(()=>{});}
+function copiar(btn,id){const el=$('leg-'+id);navigator.clipboard.writeText(el.textContent).then(()=>{btn.textContent='copiado';setTimeout(()=>btn.textContent='copiar',1400);});}
+function starsEl(id){return document.querySelectorAll('#rate-'+id+' .rstar');}
+function myNota(id){return parseInt(localStorage.getItem(KEY+'_nota_'+id)||'0',10)||0;}
+function setBig(id,val,on){const b=$('ratebig-'+id);if(!b)return;b.textContent=val;b.classList.toggle('has',!!on);}
+function rateHover(id,n){starsEl(id).forEach(s=>{const v=+s.dataset.n;s.classList.toggle('on',v<=n);s.classList.remove('mine');});setBig(id,n,true);}
+function rateLeave(id){paintRate(id);}
+function paintRate(id){const mine=myNota(id);starsEl(id).forEach(s=>{const v=+s.dataset.n;const on=mine>0&&v<=mine;s.classList.toggle('on',on);s.classList.toggle('mine',on);});
+  if(avgs[id])setBig(id,avgs[id].toFixed(1),true);else if(mine>0)setBig(id,mine,true);else setBig(id,'-',false);}
+function rateClick(id,n){localStorage.setItem(KEY+'_nota_'+id,n);paintRate(id);const nome=localStorage.getItem(KEY+'_nome')||'';if(!nome){abrir('corte',id,'nota',n);return;}saveNota(id,n,nome,'');}
+async function saveNota(id,n,nome,obs){try{const body=new URLSearchParams({action:'append',slug:SLUG,alvo:'corte',id,decisao:'nota',nota:String(n),obs:obs||'',nome});const r=await fetch(API,{method:'POST',body});const st=await r.json();if(st&&!st.erro){aplicar(st);toast('nota '+n+' salva ✓');}else{toast('erro: '+((st&&st.erro)||'?'));}}catch(e){toast('erro ao salvar nota');}}
+function reorderGrid(grid){if(!grid)return;
+  const cur=Array.from(grid.querySelectorAll('.card'));
+  const anyNota=cur.some(c=>aslist(estado.cortes[c.dataset.cid]).some(e=>e.decisao==='nota'&&e.nota));
+  const info=cid=>{const l=aslist(estado.cortes[cid]);const ns=l.filter(e=>e.decisao==='nota'&&e.nota).map(e=>+e.nota);
+    return{avg:ns.length?ns.reduce((a,b)=>a+b,0)/ns.length:-1,cnt:ns.length};};
+  const sorted=cur.slice().sort((a,b)=>{const A=info(a.dataset.cid),B=info(b.dataset.cid);
+    if(B.avg!==A.avg)return B.avg-A.avg;if(B.cnt!==A.cnt)return B.cnt-A.cnt;return (+a.dataset.idx)-(+b.dataset.idx);});
+  sorted.forEach((c,i)=>{const r=c.querySelector('.rank');if(r)r.textContent=anyNota?('#'+(i+1)):'';});
+  const same=cur.every((c,i)=>c===sorted[i]);if(!same)sorted.forEach(c=>grid.appendChild(c));}
+function reorderCards(){document.querySelectorAll('.grid').forEach(reorderGrid);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function quando(at){if(!at)return'';const d=new Date(at);if(isNaN(d))return'';const p=n=>String(n).padStart(2,'0');return p(d.getDate())+'/'+p(d.getMonth()+1)+' '+p(d.getHours())+':'+p(d.getMinutes());}
+function abrir(alvo,id,dec,nota){alvoAtual={alvo,id,decisao:dec,nota:nota||0};const t=alvo==='corte'?('corte '+id):'podcast inteiro';const noun=alvo==='corte'?'corte':'podcast';const cfg=MSG[dec];
+  $('mTitle').innerHTML=TIT[dec]+' <span class="mt-badge '+(CLS[dec]||'')+'">'+t+'</span>';
+  $('mMsg').textContent=cfg.msg.replace('ALVO',noun);
+  $('mObsLabel').textContent=cfg.obsLabel;$('mObs').placeholder=cfg.obsPh;$('mSalvar').textContent=cfg.btn;
+  $('mNome').value=localStorage.getItem(KEY+'_nome')||'';$('mObs').value='';$('modal').classList.add('show');setTimeout(()=>$('mNome').focus(),60);}
+function fechar(){$('modal').classList.remove('show');}
+async function salvar(){const nome=$('mNome').value.trim();if(!nome){$('mNome').focus();toast('Escreva seu nome');return;}
+  const obs=$('mObs').value.trim();localStorage.setItem(KEY+'_nome',nome);const a=alvoAtual;
+  try{const body=new URLSearchParams({action:'append',slug:SLUG,alvo:a.alvo,id:a.id||'',decisao:a.decisao,nota:(a.nota||''),obs,nome});
+    if(a.decisao==='nota'&&a.id)localStorage.setItem(KEY+'_nota_'+a.id,a.nota);
+    const r=await fetch(API,{method:'POST',body});const st=await r.json();
+    if(st&&!st.erro){aplicar(st);fechar();toast('salvo ✓');}else{toast('erro: '+((st&&st.erro)||'?'));}
+  }catch(e){toast('erro ao salvar, tenta de novo');}}
+function feedHTML(list){if(!Array.isArray(list)||!list.length)return'<div class="feed-empty">nenhuma avaliação ainda</div>';
+  return list.slice().reverse().map(e=>{const tag=e.decisao==='nota'?('★ Nota '+(e.nota||'?')+'/10'):(TAG[e.decisao]||esc(e.decisao));return '<div class="fb '+(CLS[e.decisao]||'')+'"><div class="fb__h"><b>'+esc(e.nome)+'</b><span class="fb__tag">'+tag+'</span><span class="fb__t">'+quando(e.at)+'</span></div>'+(e.obs?('<p>'+esc(e.obs)+'</p>'):'')+'</div>';}).join('');}
+function aslist(v){return Array.isArray(v)?v:[];}
+function dominante(list){if(!list||!list.length)return'';const c={aprovado:0,alteracoes:0,reprovado:0};list.forEach(e=>{if(c[e.decisao]!==undefined)c[e.decisao]++;});let best='',bv=0;['aprovado','alteracoes','reprovado'].forEach(k=>{if(c[k]>bv){bv=c[k];best=k;}});return best;}
+function setDom(el,dec){if(!el)return;el.classList.remove('dom-ok','dom-adj','dom-no');if(DOM[dec])el.classList.add(DOM[dec]);}
+function aplicar(st){if(!st)return;estado.full=aslist(st.full);estado.cortes=(st.cortes&&typeof st.cortes==='object'&&!Array.isArray(st.cortes))?st.cortes:{};
+  $('feed-full').innerHTML=feedHTML(estado.full);setDom($('fulldec'),dominante(estado.full));let tot=estado.full.length;
+  const proc=c=>{const l=aslist(estado.cortes[c.id]);tot+=l.length;const el=$('feed-'+c.id);if(el)el.innerHTML=feedHTML(l);setDom($('card-'+c.id),dominante(l));
+    const ns=l.filter(e=>e.decisao==='nota'&&e.nota).map(e=>+e.nota);const av=$('rateavg-'+c.id);
+    avgs[c.id]=ns.length?(ns.reduce((a,b)=>a+b,0)/ns.length):0;
+    if(av)av.textContent=ns.length?('média '+avgs[c.id].toFixed(1)+' · '+ns.length+(ns.length===1?' nota':' notas')):'sem notas ainda';
+    paintRate(c.id);};
+  DADOS.cortes.forEach(proc);(DADOS.blocos||[]).forEach(proc);
+  reorderCards();
+  const r=$('resumo');if(r)r.textContent=tot+(tot===1?' avaliação recebida':' avaliações recebidas');}
+async function tick(){try{const r=await fetch(API+'?action=get&slug='+encodeURIComponent(SLUG),{cache:'no-store'});aplicar(await r.json());}catch(e){}}
+$('modal').addEventListener('click',e=>{if(e.target===$('modal'))fechar();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fechar();});
+DADOS.cortes.forEach(c=>paintRate(c.id));(DADOS.blocos||[]).forEach(c=>paintRate(c.id));
+tick();setInterval(tick,12000);
+</script>
+</body></html>
