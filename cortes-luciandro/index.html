@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validação de Cortes: Luciandro (repassador) + Arthur · mercado automotivo e a invasão chinesa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#012D5A;--navy-2:#071f38;--navy-3:#0b294a;--card:#0d3160;--red:#FE3231;--blue:#01509D;--white:#fff;--muted:#9fb6d4;--ok:#1db954;--adj:#f0a020;--no:#FE3231;--line:rgba(255,255,255,.10);}
+  *{box-sizing:border-box} html{scroll-behavior:smooth}
+  body{margin:0;font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(1200px 600px at 50% -10%,#0a3d78 0,transparent 60%),var(--navy-2);background-color:var(--navy-2);color:var(--white);line-height:1.5}
+  a{color:inherit} .wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+  header.top{background:linear-gradient(180deg,var(--navy) 0,var(--navy-2) 100%);border-bottom:3px solid var(--red);padding:24px 0 20px}
+  .brand{display:flex;align-items:center;gap:16px} .brand img{width:56px;height:56px;border-radius:14px;box-shadow:0 6px 22px rgba(0,0,0,.35)}
+  .brand h1{font-size:20px;margin:0;font-weight:800} .brand p{margin:2px 0 0;color:var(--muted);font-size:13px;font-weight:600}
+  .kicker{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+  .note{margin-top:14px;background:rgba(254,50,49,.10);border:1px solid rgba(254,50,49,.45);border-radius:12px;padding:11px 14px;font-size:13px;color:#ffd9d8} .note b{color:#fff}
+  .who{margin:16px 0 0;background:var(--navy-3);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .who label{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+  .who input{width:100%;margin-top:6px;font-family:inherit;font-size:15px;color:#fff;background:var(--navy-2);border:1px solid var(--line);border-radius:10px;padding:10px} .who input:focus{outline:none;border-color:var(--blue)}
+  .section-title{display:flex;align-items:center;gap:10px;margin:24px 0 12px} .section-title .line{flex:1;height:1px;background:var(--line)}
+  .section-title span{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .full .frame{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.45);background:#000}
+  .full video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+  .fulldec{margin-top:12px;background:linear-gradient(180deg,var(--card) 0,#0a2a53 100%);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .fulldec__q{font-size:15px;font-weight:800;margin-bottom:10px}
+  .decisao{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:var(--navy);color:#fff;border-radius:10px;padding:9px 14px;font-size:13px;font-weight:800;cursor:pointer;transition:.15s}
+  .btn:hover{transform:translateY(-1px)} .btn.active.btn--ok{background:var(--ok);border-color:transparent}
+  .btn.active.btn--adj{background:var(--adj);border-color:transparent;color:#3a2600} .btn.active.btn--no{background:var(--no);border-color:transparent}
+  .statusline{margin-top:8px;font-size:12.5px;font-weight:700} .s-ok{color:var(--ok)} .s-adj{color:var(--adj)} .s-no{color:var(--no)} .s-wait{color:var(--muted)} .s-meta{color:var(--muted);font-weight:600}
+  .obs{display:flex;flex-direction:column;gap:5px;margin-top:10px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+  .obs textarea{font-family:inherit;font-size:13.5px;font-weight:500;text-transform:none;letter-spacing:0;color:#fff;background:var(--navy-2);border:1px solid var(--line);border-radius:10px;padding:10px;resize:vertical} .obs textarea:focus{outline:none;border-color:var(--blue)}
+  .resumo{margin:2px 0 14px;color:#cfe0f6;font-size:13px;background:var(--navy-3);border:1px solid var(--line);border-radius:10px;padding:9px 13px} .resumo b{color:#fff}
+  .grid{display:grid;grid-template-columns:1fr;gap:20px;margin:12px 0 40px} @media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+  .card{background:linear-gradient(180deg,var(--card) 0,#0a2a53 100%);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+  .card.aprovado{border-color:rgba(29,185,84,.75)} .card.ajuste{border-color:rgba(240,160,32,.75)} .card.reprovado{border-color:rgba(254,50,49,.7);opacity:.9}
+  .card__media{position:relative;background:#000} .player{display:block;width:100%;aspect-ratio:16/9;background:#000}
+  .badge{position:absolute;top:10px;left:10px;z-index:2;background:rgba(1,45,90,.85);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:800;letter-spacing:1px} .star{color:#ffd23f}
+  .rank{position:absolute;top:10px;right:10px;z-index:2;color:#04310f;background:#ffd23f;border-radius:999px;padding:3px 11px;font-size:13px;font-weight:900;box-shadow:0 3px 10px rgba(0,0,0,.35)} .rank:empty{display:none}
+  .card__body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:12px}
+  .meta{display:flex;flex-wrap:wrap;gap:6px} .chip{font-size:11px;font-weight:700;background:var(--navy);border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:#cfe0f6}
+  .chip--time{color:#fff;background:var(--blue);border-color:transparent} .chip--tag{color:#ffd9d8;background:rgba(254,50,49,.14);border-color:rgba(254,50,49,.35)}
+  .chip--ctx{cursor:pointer;text-decoration:none} .chip--ctx:hover{background:var(--red);color:#fff;border-color:transparent}
+  .card__title{margin:0;font-size:17px;font-weight:800;line-height:1.25} .card__desc{margin:0;font-size:14px;color:#dbe7f7}
+  .block{border-radius:12px;padding:11px 13px;font-size:13.5px} .block__head{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .block--legenda{background:rgba(1,80,157,.16);border:1px solid rgba(1,80,157,.5)} .block--legenda .legenda{margin:0;color:#eaf2ff;font-weight:600}
+  .block--motivo{background:rgba(255,255,255,.03);border:1px solid var(--line)} .block--motivo p{margin:0;color:#c3d4ec}
+  .mini{background:var(--blue);color:#fff;border:none;border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer} .mini:hover{background:#0668c9}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:22px 0 40px}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;background:#000;border:1px solid var(--line);color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:700;transition:.25s;pointer-events:none;z-index:50} .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:520px){ .decisao .btn{flex:1 1 30%;padding:10px 6px;font-size:12px;text-align:center} .brand h1{font-size:18px} }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <span class="kicker">Validação de cortes</span>
+  <div class="brand"><img src="assets/logo-repasse-podcast.png" alt="logo">
+    <div><h1>Luciandro (repassador) + Arthur · mercado automotivo e a invasão chinesa</h1><p>Repasse Podcast &middot; 13 cortes selecionados</p></div></div>
+  <div class="note"><b>Como funciona:</b> aprove (ou peca alteracoes) no <b>podcast inteiro</b> em cima e em cada <b>corte</b> embaixo. Cada corte pode ser <b>Aprovado</b>, marcado como <b>Ajustar</b> (com o que mudar) ou <b>Nao aprovado</b>. Tudo fica salvo automaticamente e todo mundo ve. Os cortes sao <b>crus</b> (formato original, sem edicao), aqui e so pra escolher o que usar.</div>
+  <div class="who"><label for="nome">Quem esta validando?</label><input id="nome" type="text" placeholder="Seu nome (ex.: Igor, Junior, David...)"></div>
+</div></header>
+
+<main class="wrap">
+  <section class="full">
+    <div class="section-title"><span>Podcast completo</span><div class="line"></div></div>
+    <div class="frame"><video id="full" controls preload="metadata" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-01.jpg">
+      <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/completo.mp4" type="video/mp4">Seu navegador não suporta vídeo.</video></div>
+    <div class="fulldec">
+      <div class="fulldec__q">Aprova o podcast inteiro?</div>
+      <div class="decisao" id="dec-full">
+        <button type="button" class="btn btn--ok" data-dec="aprovado"   onclick="decidirFull('aprovado')">&#10003; Aprovar podcast</button>
+        <button type="button" class="btn btn--no" data-dec="alteracoes" onclick="decidirFull('alteracoes')">&#10007; Pedir alterações</button>
+      </div>
+      <div class="statusline" id="st-full"><span class="s-wait">aguardando validacao</span></div>
+      <label class="obs"><span>Observacoes do podcast</span>
+        <textarea id="obs-full" rows="2" placeholder="O que ajustar no episodio como um todo (opcional)..."
+          oninput="marcarDirty('full')" onblur="salvarObsFull()"></textarea></label>
+    </div>
+  </section>
+
+  <div class="section-title"><span>Os cortes</span><div class="line"></div></div>
+  <div class="resumo" id="resumo">carregando validacao...</div>
+  <div class="grid">
+    <article class="card" id="card-01" data-id="01">
+      <div class="card__media">
+        <div class="badge">CORTE 01 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-01.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-01.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 03:21 a 04:14</span>
+          <span class="chip">53s</span>
+          <span class="chip chip--tag">Mercado / invasao chinesa</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(201.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Floripa abriu 12 concessionarias em 1 ano</h3>
+        <p class="card__desc">Luciandro mostra a velocidade da mudanca: em um ano a Grande Floripa ganhou 10 a 12 concessionarias novas com a chegada das montadoras chinesas.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'01')">copiar</button></div>
+          <p class="legenda" id="leg-01">Em um ano, a Grande Floripa abriu 12 concessionarias novas. O mercado de carros mudou e muita gente foi pega de surpresa. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Dado surpreendente + curiosidade (quando isso ja aconteceu antes?).</p>
+        </div>
+        <div class="decisao" id="dec-01">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('01','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('01','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('01','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-01"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-01" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('01')" onblur="salvarObsCorte('01')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-02" data-id="02">
+      <div class="card__media">
+        <div class="badge">CORTE 02 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-02.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-02.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 10:53 a 11:37</span>
+          <span class="chip">44s</span>
+          <span class="chip chip--tag">Comparativo / hot take</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(653.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">A Tracker virou um onibus perto do chines</h3>
+        <p class="card__desc">Comparacao direta: Tracker e T-Cross custando quase 200 mil contra uma Tiggo 5 completa por 130 mil. O nacional perdeu o jogo do custo-beneficio.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'02')">copiar</button></div>
+          <p class="legenda" id="leg-02">T-Cross zero batendo 200 mil e a Tiggo completa por 130. O nacional ainda cobra esse preco? @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Opiniao polemica que gera comentario + identificacao de quem acompanha o mercado.</p>
+        </div>
+        <div class="decisao" id="dec-02">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('02','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('02','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('02','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-02"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-02" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('02')" onblur="salvarObsCorte('02')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-03" data-id="03">
+      <div class="card__media">
+        <div class="badge">CORTE 03 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-03.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-03.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 12:04 a 12:44</span>
+          <span class="chip">40s</span>
+          <span class="chip chip--tag">Industria nacional / previsao</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(724.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Ou baixam o preco ou morrem na praia</h3>
+        <p class="card__desc">O recado seco para as montadoras tradicionais: ou baixam o preco ou morrem na praia. E ja estao baixando, com a Mitsubishi cortando 50 mil.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'03')">copiar</button></div>
+          <p class="legenda" id="leg-03">O recado de quem vive o mercado: ou as montadoras baixam o preco ou vao morrer na praia. E ja comecou. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Frase de impacto + previsao ousada (gancho forte de titulo).</p>
+        </div>
+        <div class="decisao" id="dec-03">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('03','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('03','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('03','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-03"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-03" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('03')" onblur="salvarObsCorte('03')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-04" data-id="04">
+      <div class="card__media">
+        <div class="badge">CORTE 04 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-04.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-04.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 15:21 a 16:13</span>
+          <span class="chip">52s</span>
+          <span class="chip chip--tag">Politica / mercado</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(921.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Esquerda, direita e a porta aberta pra China</h3>
+        <p class="card__desc">O peso da politica no preco do carro: o governo abriu a porta pra China e ja tem 10 novas montadoras na fila. Se a direita ganhar, o cenario muda.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'04')">copiar</button></div>
+          <p class="legenda" id="leg-04">A eleicao pode mexer no preco do seu carro. Tem 10 montadoras chinesas na fila esperando pra entrar. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Hot take politico (gera muito comentario) + informacao de bastidor.</p>
+        </div>
+        <div class="decisao" id="dec-04">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('04','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('04','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('04','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-04"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-04" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('04')" onblur="salvarObsCorte('04')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-05" data-id="05">
+      <div class="card__media">
+        <div class="badge">CORTE 05 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-05.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-05.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 18:25 a 19:00</span>
+          <span class="chip">35s</span>
+          <span class="chip chip--tag">Conteudo / vendas</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1105.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Abro a camera e o que sair eu posto</h3>
+        <p class="card__desc">Arthur, 17 anos, revela o segredo dos videos que vendem: nada de gravar mil vezes. Abre a camera, grava sendo ele mesmo e posta.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'05')">copiar</button></div>
+          <p class="legenda" id="leg-05">O segredo do menino que vende 40 carros por mes: abre a camera e posta do jeito que sai. Sem perfeicao. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Autoridade + identificacao (dica real de social media na voz de um jovem).</p>
+        </div>
+        <div class="decisao" id="dec-05">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('05','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('05','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('05','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-05"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-05" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('05')" onblur="salvarObsCorte('05')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-06" data-id="06">
+      <div class="card__media">
+        <div class="badge">CORTE 06 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-06.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-06.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 29:41 a 30:22</span>
+          <span class="chip">41s</span>
+          <span class="chip chip--tag">Historia / inspiracao</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(1781.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">17 anos e ja vende 40 carros por mes</h3>
+        <p class="card__desc">O menino prodigio: primeiro carro vendido aos 14, hoje aos 17 passa de 40 carros no mes. O pai conta o orgulho de ver o talento do filho.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'06')">copiar</button></div>
+          <p class="legenda" id="leg-06">Vendeu o primeiro carro aos 14. Aos 17, ja passa de 40 por mes. O menino prodigio do mercado automotivo. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Historia inspiradora + numero seco que impressiona.</p>
+        </div>
+        <div class="decisao" id="dec-06">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('06','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('06','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('06','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-06"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-06" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('06')" onblur="salvarObsCorte('06')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-07" data-id="07">
+      <div class="card__media">
+        <div class="badge">CORTE 07 <span class="star" title="Aposta de maior viralizacao">&#9733;</span></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-07.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-07.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 39:41 a 40:32</span>
+          <span class="chip">51s</span>
+          <span class="chip chip--tag">Preco / verdade que doi</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(2381.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Meio milhao numa Hilux: o brasileiro pagou</h3>
+        <p class="card__desc">Uma SW4 zero que custava 230 mil antes da pandemia chegou a quase 500 mil. E o brasileiro pagou. A conta que ninguem quer fazer.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'07')">copiar</button></div>
+          <p class="legenda" id="leg-07">Uma SW4 de 230 mil chegou a quase meio milhao. E o brasileiro pagou. Ate quando? @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Verdade que doi + indignacao (altissimo potencial de comentario).</p>
+        </div>
+        <div class="decisao" id="dec-07">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('07','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('07','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('07','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-07"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-07" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('07')" onblur="salvarObsCorte('07')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-08" data-id="08">
+      <div class="card__media">
+        <div class="badge">CORTE 08 <span class="star" title="Aposta de maior viralizacao">&#9733;</span></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-08.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-08.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 48:06 a 49:30</span>
+          <span class="chip">84s</span>
+          <span class="chip chip--tag">Precificacao / autoridade</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(2886.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">A nova regra: FIPE menos 10 por cento</h3>
+        <p class="card__desc">A aula pratica de precificacao: vender abaixo da FIPE deixou de ser diferencial e virou obrigacao. A nova referencia do mercado e FIPE menos 10 por cento.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'08')">copiar</button></div>
+          <p class="legenda" id="leg-08">Vender abaixo da FIPE nao e mais diferencial, virou obrigacao. A nova regra e FIPE menos 10 por cento. Anota, lojista. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Sacada de autoridade + dica pratica salvavel (o lojista compartilha).</p>
+        </div>
+        <div class="decisao" id="dec-08">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('08','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('08','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('08','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-08"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-08" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('08')" onblur="salvarObsCorte('08')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-09" data-id="09">
+      <div class="card__media">
+        <div class="badge">CORTE 09 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-09.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-09.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 51:36 a 52:23</span>
+          <span class="chip">47s</span>
+          <span class="chip chip--tag">Bastidor / compra</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3096.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Onde estao os melhores carros pra comprar</h3>
+        <p class="card__desc">O bastidor da compra: hoje o carro com margem melhor aparece mais no particular do que no repasse entre lojas. A verdade crua de quem compra e vende.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'09')">copiar</button></div>
+          <p class="legenda" id="leg-09">O segredo de quem acerta na compra hoje esta no particular, nao no repasse entre lojas. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Bastidor honesto + curiosidade (como os grandes acham carro bom).</p>
+        </div>
+        <div class="decisao" id="dec-09">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('09','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('09','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('09','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-09"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-09" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('09')" onblur="salvarObsCorte('09')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-10" data-id="10">
+      <div class="card__media">
+        <div class="badge">CORTE 10 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-10.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-10.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 55:13 a 55:57</span>
+          <span class="chip">44s</span>
+          <span class="chip chip--tag">Historia / poder da midia</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3313.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Veio de onibus do Para buscar a BMW</h3>
+        <p class="card__desc">O poder do Instagram: um cliente viu o anuncio, ligou do Para, viajou dias de onibus ate Floripa, comprou a BMW X1 e voltou dirigindo.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'10')">copiar</button></div>
+          <p class="legenda" id="leg-10">Viu no Instagram, veio de onibus do Para ate Floripa, comprou a BMW e voltou rodando. O poder da midia. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Historia com comeco-meio-punch + prova do poder do conteudo.</p>
+        </div>
+        <div class="decisao" id="dec-10">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('10','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('10','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('10','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-10"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-10" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('10')" onblur="salvarObsCorte('10')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-11" data-id="11">
+      <div class="card__media">
+        <div class="badge">CORTE 11 <span class="star" title="Aposta de maior viralizacao">&#9733;</span></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-11.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-11.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 65:47 a 66:26</span>
+          <span class="chip">39s</span>
+          <span class="chip chip--tag">Leilao / sacada</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(3947.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Seu apartamento de leilao vale menos?</h3>
+        <p class="card__desc">A analogia que desmonta o preconceito com carro de leilao: se dois apartamentos identicos valem igual, mesmo um sendo de leilao, por que o carro seria diferente?</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'11')">copiar</button></div>
+          <p class="legenda" id="leg-11">Se o apartamento de leilao vale igual ao do vizinho, por que o carro de leilao vale menos? A resposta que ninguem tem. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Sacada de autoridade brilhante (o proprio host reconhece na hora).</p>
+        </div>
+        <div class="decisao" id="dec-11">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('11','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('11','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('11','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-11"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-11" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('11')" onblur="salvarObsCorte('11')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-12" data-id="12">
+      <div class="card__media">
+        <div class="badge">CORTE 12 <span class="star" title="Aposta de maior viralizacao">&#9733;</span></div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-12.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-12.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 80:34 a 81:23</span>
+          <span class="chip">49s</span>
+          <span class="chip chip--tag">Recado ao lojista / verdade que doi</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(4834.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">Segura o carro pra nao dar prejuizo e quebra</h3>
+        <p class="card__desc">O recado direto ao lojista teimoso: quem segura o carro de 100 a 200 mil pra nao dar prejuizo vai morrer na praia. Renova o estoque, da cinco passos pra tras pra dar cinquenta pra frente.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'12')">copiar</button></div>
+          <p class="legenda" id="leg-12">Seguro o carro pra nao ter prejuizo? Vai quebrar. Renova o estoque, da cinco passos pra tras pra dar cinquenta pra frente. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Verdade que doi + conselho acionavel (o lojista se identifica e marca outro).</p>
+        </div>
+        <div class="decisao" id="dec-12">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('12','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('12','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('12','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-12"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-12" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('12')" onblur="salvarObsCorte('12')"></textarea>
+        </label>
+      </div>
+    </article>
+
+    <article class="card" id="card-13" data-id="13">
+      <div class="card__media">
+        <div class="badge">CORTE 13 </div>
+        <video class="player" controls preload="none" playsinline poster="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/poster-13.jpg">
+          <source src="https://mediagrowth.com.br/cortes/repasse-luciandro/videos/corte-13.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="card__body">
+        <div class="meta">
+          <span class="chip chip--time">&#9201; 83:23 a 84:02</span>
+          <span class="chip">39s</span>
+          <span class="chip chip--tag">Recado ao jovem / identificacao</span>
+          <a class="chip chip--ctx" href="#" onclick="verNoCompleto(5003.0);return false;">&#9654; ver no completo</a>
+        </div>
+        <h3 class="card__title">O que falta na sua geracao e ambicao</h3>
+        <p class="card__desc">Arthur, 17 anos, manda o recado pra galera da idade dele: muita gente fica em casa no videogame sem fazer nada. O que falta e ambicao e vontade de ser alguem.</p>
+        <div class="block block--legenda">
+          <div class="block__head"><span>Legenda sugerida</span>
+            <button class="mini" type="button" onclick="copiar(this,'13')">copiar</button></div>
+          <p class="legenda" id="leg-13">O recado do jovem que ja vive de vendas: o que falta na nossa geracao e ambicao. Sai do videogame e corre atras. @repasse_podcast</p>
+        </div>
+        <div class="block block--motivo">
+          <div class="block__head"><span>Por que foi selecionado</span></div>
+          <p>Verdade que doi na voz de um jovem + identificacao geracional.</p>
+        </div>
+        <div class="decisao" id="dec-13">
+          <button type="button" class="btn btn--ok"  data-dec="aprovado"  onclick="decidirCorte('13','aprovado')">&#10003; Aprovar</button>
+          <button type="button" class="btn btn--adj" data-dec="ajuste"    onclick="decidirCorte('13','ajuste')">&#9998; Ajustar</button>
+          <button type="button" class="btn btn--no"  data-dec="reprovado" onclick="decidirCorte('13','reprovado')">&#10007; Nao aprovar</button>
+        </div>
+        <div class="statusline" id="st-13"><span class="s-wait">aguardando validacao</span></div>
+        <label class="obs"><span>Observacoes / ajustes deste corte</span>
+          <textarea id="obs-13" rows="2" placeholder="Ex.: comecar 2s antes, cortar o final, trocar a legenda..."
+            oninput="marcarDirty('13')" onblur="salvarObsCorte('13')"></textarea>
+        </label>
+      </div>
+    </article></div>
+</main>
+<footer>Página de validação de cortes &middot; MediaGrowth</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+const DADOS = {"projeto": "Cortes: Podcast Luciandro", "cliente": "Repasse Podcast", "episodio": "Luciandro (repassador) + Arthur · mercado automotivo e a invasão chinesa", "fonte": "PODCAST LUCIANDRO.mp4", "duracao_total": "92:56", "modo": "feed", "repo": "mediagrowthmkt-debug/repasse-podcast", "slug": "repasse-luciandro", "cortes": [{"id": "01", "arquivo": "videos/corte-01.mp4", "poster": "videos/poster-01.jpg", "titulo": "Floripa abriu 12 concessionarias em 1 ano", "assunto": "Mercado / invasao chinesa", "destaque": false, "inicio": "03:21", "fim": "04:14", "inicio_sec": 201.0, "dur_sec": 53.0, "duracao": "53s", "descricao": "Luciandro mostra a velocidade da mudanca: em um ano a Grande Floripa ganhou 10 a 12 concessionarias novas com a chegada das montadoras chinesas.", "legenda": "Em um ano, a Grande Floripa abriu 12 concessionarias novas. O mercado de carros mudou e muita gente foi pega de surpresa. @repasse_podcast", "motivo": "Dado surpreendente + curiosidade (quando isso ja aconteceu antes?)."}, {"id": "02", "arquivo": "videos/corte-02.mp4", "poster": "videos/poster-02.jpg", "titulo": "A Tracker virou um onibus perto do chines", "assunto": "Comparativo / hot take", "destaque": false, "inicio": "10:53", "fim": "11:37", "inicio_sec": 653.0, "dur_sec": 44.0, "duracao": "44s", "descricao": "Comparacao direta: Tracker e T-Cross custando quase 200 mil contra uma Tiggo 5 completa por 130 mil. O nacional perdeu o jogo do custo-beneficio.", "legenda": "T-Cross zero batendo 200 mil e a Tiggo completa por 130. O nacional ainda cobra esse preco? @repasse_podcast", "motivo": "Opiniao polemica que gera comentario + identificacao de quem acompanha o mercado."}, {"id": "03", "arquivo": "videos/corte-03.mp4", "poster": "videos/poster-03.jpg", "titulo": "Ou baixam o preco ou morrem na praia", "assunto": "Industria nacional / previsao", "destaque": false, "inicio": "12:04", "fim": "12:44", "inicio_sec": 724.0, "dur_sec": 40.0, "duracao": "40s", "descricao": "O recado seco para as montadoras tradicionais: ou baixam o preco ou morrem na praia. E ja estao baixando, com a Mitsubishi cortando 50 mil.", "legenda": "O recado de quem vive o mercado: ou as montadoras baixam o preco ou vao morrer na praia. E ja comecou. @repasse_podcast", "motivo": "Frase de impacto + previsao ousada (gancho forte de titulo)."}, {"id": "04", "arquivo": "videos/corte-04.mp4", "poster": "videos/poster-04.jpg", "titulo": "Esquerda, direita e a porta aberta pra China", "assunto": "Politica / mercado", "destaque": false, "inicio": "15:21", "fim": "16:13", "inicio_sec": 921.0, "dur_sec": 52.0, "duracao": "52s", "descricao": "O peso da politica no preco do carro: o governo abriu a porta pra China e ja tem 10 novas montadoras na fila. Se a direita ganhar, o cenario muda.", "legenda": "A eleicao pode mexer no preco do seu carro. Tem 10 montadoras chinesas na fila esperando pra entrar. @repasse_podcast", "motivo": "Hot take politico (gera muito comentario) + informacao de bastidor."}, {"id": "05", "arquivo": "videos/corte-05.mp4", "poster": "videos/poster-05.jpg", "titulo": "Abro a camera e o que sair eu posto", "assunto": "Conteudo / vendas", "destaque": false, "inicio": "18:25", "fim": "19:00", "inicio_sec": 1105.0, "dur_sec": 35.0, "duracao": "35s", "descricao": "Arthur, 17 anos, revela o segredo dos videos que vendem: nada de gravar mil vezes. Abre a camera, grava sendo ele mesmo e posta.", "legenda": "O segredo do menino que vende 40 carros por mes: abre a camera e posta do jeito que sai. Sem perfeicao. @repasse_podcast", "motivo": "Autoridade + identificacao (dica real de social media na voz de um jovem)."}, {"id": "06", "arquivo": "videos/corte-06.mp4", "poster": "videos/poster-06.jpg", "titulo": "17 anos e ja vende 40 carros por mes", "assunto": "Historia / inspiracao", "destaque": false, "inicio": "29:41", "fim": "30:22", "inicio_sec": 1781.0, "dur_sec": 41.0, "duracao": "41s", "descricao": "O menino prodigio: primeiro carro vendido aos 14, hoje aos 17 passa de 40 carros no mes. O pai conta o orgulho de ver o talento do filho.", "legenda": "Vendeu o primeiro carro aos 14. Aos 17, ja passa de 40 por mes. O menino prodigio do mercado automotivo. @repasse_podcast", "motivo": "Historia inspiradora + numero seco que impressiona."}, {"id": "07", "arquivo": "videos/corte-07.mp4", "poster": "videos/poster-07.jpg", "titulo": "Meio milhao numa Hilux: o brasileiro pagou", "assunto": "Preco / verdade que doi", "destaque": true, "inicio": "39:41", "fim": "40:32", "inicio_sec": 2381.0, "dur_sec": 51.0, "duracao": "51s", "descricao": "Uma SW4 zero que custava 230 mil antes da pandemia chegou a quase 500 mil. E o brasileiro pagou. A conta que ninguem quer fazer.", "legenda": "Uma SW4 de 230 mil chegou a quase meio milhao. E o brasileiro pagou. Ate quando? @repasse_podcast", "motivo": "Verdade que doi + indignacao (altissimo potencial de comentario)."}, {"id": "08", "arquivo": "videos/corte-08.mp4", "poster": "videos/poster-08.jpg", "titulo": "A nova regra: FIPE menos 10 por cento", "assunto": "Precificacao / autoridade", "destaque": true, "inicio": "48:06", "fim": "49:30", "inicio_sec": 2886.0, "dur_sec": 84.0, "duracao": "84s", "descricao": "A aula pratica de precificacao: vender abaixo da FIPE deixou de ser diferencial e virou obrigacao. A nova referencia do mercado e FIPE menos 10 por cento.", "legenda": "Vender abaixo da FIPE nao e mais diferencial, virou obrigacao. A nova regra e FIPE menos 10 por cento. Anota, lojista. @repasse_podcast", "motivo": "Sacada de autoridade + dica pratica salvavel (o lojista compartilha)."}, {"id": "09", "arquivo": "videos/corte-09.mp4", "poster": "videos/poster-09.jpg", "titulo": "Onde estao os melhores carros pra comprar", "assunto": "Bastidor / compra", "destaque": false, "inicio": "51:36", "fim": "52:23", "inicio_sec": 3096.0, "dur_sec": 47.0, "duracao": "47s", "descricao": "O bastidor da compra: hoje o carro com margem melhor aparece mais no particular do que no repasse entre lojas. A verdade crua de quem compra e vende.", "legenda": "O segredo de quem acerta na compra hoje esta no particular, nao no repasse entre lojas. @repasse_podcast", "motivo": "Bastidor honesto + curiosidade (como os grandes acham carro bom)."}, {"id": "10", "arquivo": "videos/corte-10.mp4", "poster": "videos/poster-10.jpg", "titulo": "Veio de onibus do Para buscar a BMW", "assunto": "Historia / poder da midia", "destaque": false, "inicio": "55:13", "fim": "55:57", "inicio_sec": 3313.0, "dur_sec": 44.0, "duracao": "44s", "descricao": "O poder do Instagram: um cliente viu o anuncio, ligou do Para, viajou dias de onibus ate Floripa, comprou a BMW X1 e voltou dirigindo.", "legenda": "Viu no Instagram, veio de onibus do Para ate Floripa, comprou a BMW e voltou rodando. O poder da midia. @repasse_podcast", "motivo": "Historia com comeco-meio-punch + prova do poder do conteudo."}, {"id": "11", "arquivo": "videos/corte-11.mp4", "poster": "videos/poster-11.jpg", "titulo": "Seu apartamento de leilao vale menos?", "assunto": "Leilao / sacada", "destaque": true, "inicio": "65:47", "fim": "66:26", "inicio_sec": 3947.0, "dur_sec": 39.0, "duracao": "39s", "descricao": "A analogia que desmonta o preconceito com carro de leilao: se dois apartamentos identicos valem igual, mesmo um sendo de leilao, por que o carro seria diferente?", "legenda": "Se o apartamento de leilao vale igual ao do vizinho, por que o carro de leilao vale menos? A resposta que ninguem tem. @repasse_podcast", "motivo": "Sacada de autoridade brilhante (o proprio host reconhece na hora)."}, {"id": "12", "arquivo": "videos/corte-12.mp4", "poster": "videos/poster-12.jpg", "titulo": "Segura o carro pra nao dar prejuizo e quebra", "assunto": "Recado ao lojista / verdade que doi", "destaque": true, "inicio": "80:34", "fim": "81:23", "inicio_sec": 4834.0, "dur_sec": 49.0, "duracao": "49s", "descricao": "O recado direto ao lojista teimoso: quem segura o carro de 100 a 200 mil pra nao dar prejuizo vai morrer na praia. Renova o estoque, da cinco passos pra tras pra dar cinquenta pra frente.", "legenda": "Seguro o carro pra nao ter prejuizo? Vai quebrar. Renova o estoque, da cinco passos pra tras pra dar cinquenta pra frente. @repasse_podcast", "motivo": "Verdade que doi + conselho acionavel (o lojista se identifica e marca outro)."}, {"id": "13", "arquivo": "videos/corte-13.mp4", "poster": "videos/poster-13.jpg", "titulo": "O que falta na sua geracao e ambicao", "assunto": "Recado ao jovem / identificacao", "destaque": false, "inicio": "83:23", "fim": "84:02", "inicio_sec": 5003.0, "dur_sec": 39.0, "duracao": "39s", "descricao": "Arthur, 17 anos, manda o recado pra galera da idade dele: muita gente fica em casa no videogame sem fazer nada. O que falta e ambicao e vontade de ser alguem.", "legenda": "O recado do jovem que ja vive de vendas: o que falta na nossa geracao e ambicao. Sai do videogame e corre atras. @repasse_podcast", "motivo": "Verdade que doi na voz de um jovem + identificacao geracional."}], "blocos": [{"id": "b01", "arquivo": "videos/bloco-b01.mp4", "poster": "videos/poster-b01.jpg", "titulo": "A invasao chinesa que derrubou o mercado", "assunto": "Mercado automotivo", "inicio": "03:21", "fim": "12:04", "inicio_sec": 201.0, "dur_sec": 523.0, "duracao": "8:43", "hook": "Uma mudanca brusca com a chegada das montadoras chinesas pegou muita gente de surpresa.", "hook_porque": "Abre com um dado concreto (12 concessionarias novas em Floripa) e uma tensao real que todo lojista esta vivendo agora.", "titulos": ["A invasao chinesa que derrubou o preco dos carros", "Ou as montadoras baixam o preco ou morrem na praia", "O que os chineses fizeram com o mercado automotivo"], "thumb_sec": 220.0, "midroll": "07:30", "midroll_sec": 450.0, "resumo": "Da chegada em massa das marcas chinesas ao ultimato as montadoras nacionais: ou baixam o preco ou somem.", "score": 9.1, "flags": []}, {"id": "b02", "arquivo": "videos/bloco-b02.mp4", "poster": "videos/poster-b02.jpg", "titulo": "O menino que so queria futebol e virou fenomeno", "assunto": "Historia pai e filho", "inicio": "17:44", "fim": "26:24", "inicio_sec": 1064.0, "dur_sec": 520.0, "duracao": "8:40", "hook": "Esse menino e um fenomeno da internet, aos 17 anos vende mais que muito vendedor experiente.", "hook_porque": "Arco emocional completo (pai preocupado com o filho que so via futebol ate o talento despertar) com payoff inspirador.", "titulos": ["O menino que so queria futebol e virou fenomeno vendendo carros", "Aos 17 anos ele ja vende 40 carros por mes", "A historia do pai que despertou o talento do filho"], "thumb_sec": 1110.0, "midroll": "22:30", "midroll_sec": 1350.0, "resumo": "Luciandro conta como tirou o filho do videogame na pandemia e descobriu um vendedor nato.", "score": 8.7, "flags": []}, {"id": "b03", "arquivo": "videos/bloco-b03.mp4", "poster": "videos/poster-b03.jpg", "titulo": "O eletrico vai baixar e o brasileiro pagou caro", "assunto": "Eletricos, politica e preco", "inicio": "32:04", "fim": "40:32", "inicio_sec": 1924.0, "dur_sec": 508.0, "duracao": "8:28", "hook": "Nao se enganem: o carro eletrico tambem vai baixar de preco.", "hook_porque": "Abre uma previsao ousada (o eletrico vai desabar) e amarra com dados reais de venda ate o soco do meio milhao numa Hilux.", "titulos": ["O carro eletrico tambem vai desabar de preco", "BYD ja vende mais que Corolla: o jogo virou", "Meio milhao numa Hilux? O brasileiro foi enganado"], "thumb_sec": 1980.0, "midroll": "36:30", "midroll_sec": 2190.0, "resumo": "Da concorrencia entre os chineses ao dado de que o BYD King ja passou o Corolla, fechando na alta absurda das picapes.", "score": 8.9, "flags": ["Linguagem informal ~40:17 (brasileiro otario/burro): checar se corta ou mantem pela monetizacao"]}, {"id": "b04", "arquivo": "videos/bloco-b04.mp4", "poster": "videos/poster-b04.jpg", "titulo": "A FIPE morreu: a nova regra pra nao quebrar", "assunto": "Precificacao e estrategia de venda", "inicio": "46:59", "fim": "55:57", "inicio_sec": 2819.0, "dur_sec": 538.0, "duracao": "8:58", "hook": "O que a gente tem pra se basear no preco? A FIPE. So que a FIPE nao acompanha mais o mercado.", "hook_porque": "Comeca com uma pergunta que abre loop (se a FIPE nao vale mais, o que vale?) e entrega a nova regra pratica de precificacao.", "titulos": ["A FIPE morreu: a nova regra pra nao quebrar", "Por que Sao Paulo compra carro em Santa Catarina", "O maior repassador de SC revela como precificar hoje"], "thumb_sec": 2840.0, "midroll": "51:30", "midroll_sec": 3090.0, "resumo": "Da falencia da FIPE como referencia a nova regra (FIPE menos 10 por cento) e a estrategia de vender pro Brasil inteiro.", "score": 8.8, "flags": []}, {"id": "b05", "arquivo": "videos/bloco-b05.mp4", "poster": "videos/poster-b05.jpg", "titulo": "Leilao e parecer tecnico: a injustica que derruba seu carro", "assunto": "Leilao, seguro e desvalorizacao", "inicio": "64:07", "fim": "72:18", "inicio_sec": 3847.0, "dur_sec": 491.0, "duracao": "8:11", "hook": "O banco tomou o carro, nao bateu, esta tudo certo, e mesmo assim jogam no mesmo pacote do sinistro. Isso e uma injustica.", "hook_porque": "Abre uma indignacao real e universal (voce pode ser prejudicado sem culpa) e desenvolve com a analogia genial do apartamento.", "titulos": ["A injustica do leilao que derruba o preco do seu carro", "Parecer tecnico desfavoravel: o que ninguem te conta", "Seu carro pode desvalorizar por causa de um risco na traseira"], "thumb_sec": 3960.0, "midroll": "68:00", "midroll_sec": 4080.0, "resumo": "Do preconceito com carro de leilao ao parecer tecnico desfavoravel que desvaloriza o carro por um simples acionamento de seguro.", "score": 8.6, "flags": []}]};
+const API = "https://mediagrowth.com.br/cortes-api/api.php";
+const SLUG = "repasse-luciandro";
+const KEY = "valida_"+SLUG;
+let estado = {full:{}, cortes:{}};
+const dirty = {};
+
+function $(id){return document.getElementById(id);}
+function getNome(){return $('nome').value.trim();}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1600);}
+function verNoCompleto(sec){const v=$('full');window.scrollTo({top:0,behavior:'smooth'});v.currentTime=sec;v.play().catch(()=>{});}
+function copiar(btn,id){const el=$('leg-'+id);navigator.clipboard.writeText(el.textContent).then(()=>{btn.textContent='copiado';setTimeout(()=>btn.textContent='copiar',1400);});}
+function marcarDirty(k){dirty['obs-'+k]=true;}
+function val(id){const t=$(id);return t?t.value:'';}
+function checkNome(){if(getNome())return true;toast('Escreva seu nome antes de validar');$('nome').focus();return false;}
+
+function quando(at){if(!at)return'';const d=new Date(at);if(isNaN(d))return'';const p=n=>String(n).padStart(2,'0');return p(d.getDate())+'/'+p(d.getMonth()+1)+' '+p(d.getHours())+':'+p(d.getMinutes());}
+function statusHTML(e){
+  if(!e||!e.decisao)return'<span class="s-wait">aguardando validacao</span>';
+  const map={aprovado:['s-ok','✓ Aprovado'],ajuste:['s-adj','✎ Ajuste pedido'],reprovado:['s-no','✗ Nao aprovado'],alteracoes:['s-no','✗ Alteracoes pedidas']};
+  const m=map[e.decisao]||['s-wait',e.decisao];
+  const meta=(e.nome?(' · '+e.nome):'')+(e.at?(' · '+quando(e.at)):'');
+  return '<span class="'+m[0]+'">'+m[1]+'</span><span class="s-meta">'+meta+'</span>';
+}
+function setButtons(box,dec){if(!box)return;box.querySelectorAll('.btn').forEach(b=>b.classList.toggle('active',b.dataset.dec===dec));}
+function setObs(id,v){const t=$(id);if(!t)return;if(document.activeElement===t||dirty[id])return;t.value=v||'';}
+
+function aplicar(st){
+  if(!st)return;
+  estado.full=(st.full&&!Array.isArray(st.full))?st.full:{};
+  estado.cortes=(st.cortes&&!Array.isArray(st.cortes))?st.cortes:{};
+  setButtons($('dec-full'),estado.full.decisao);
+  $('st-full').innerHTML=statusHTML(estado.full);
+  setObs('obs-full',estado.full.obs);
+  DADOS.cortes.forEach(c=>{
+    const e=estado.cortes[c.id]||{};
+    setButtons($('dec-'+c.id),e.decisao);
+    $('st-'+c.id).innerHTML=statusHTML(e);
+    setObs('obs-'+c.id,e.obs);
+    const card=$('card-'+c.id);card.classList.remove('aprovado','ajuste','reprovado');
+    if(e.decisao==='aprovado')card.classList.add('aprovado');
+    else if(e.decisao==='ajuste')card.classList.add('ajuste');
+    else if(e.decisao==='reprovado')card.classList.add('reprovado');
+  });
+  resumo();
+}
+function resumo(){
+  let ap=0,aj=0,no=0;
+  DADOS.cortes.forEach(c=>{const d=(estado.cortes[c.id]||{}).decisao;if(d==='aprovado')ap++;else if(d==='ajuste')aj++;else if(d==='reprovado')no++;});
+  const pend=DADOS.cortes.length-ap-aj-no;
+  const fmap={aprovado:'✓ aprovado',alteracoes:'✗ alteracoes pedidas'};
+  const ftxt=fmap[estado.full.decisao]||'aguardando';
+  $('resumo').innerHTML='<b>Podcast:</b> '+ftxt+' &nbsp;&middot;&nbsp; <b>Cortes:</b> '+ap+' aprovados &middot; '+aj+' ajuste &middot; '+no+' nao &middot; '+pend+' pendentes';
+}
+
+async function apiGet(){if(!API)return null;try{const r=await fetch(API+'?action=get&slug='+encodeURIComponent(SLUG),{cache:'no-store'});return await r.json();}catch(e){return null;}}
+async function apiSave(alvo,id,decisao,obs){
+  const nome=getNome();
+  const entry={decisao,obs,nome,at:new Date().toISOString()};
+  if(alvo==='full')estado.full=entry;else estado.cortes[id]=entry;
+  aplicar({full:estado.full,cortes:estado.cortes});
+  dirty['obs-'+(alvo==='full'?'full':id)]=false;
+  if(!API){toast('salvo (local)');return;}
+  try{const body=new URLSearchParams({action:'save',slug:SLUG,alvo,id:id||'',decisao:decisao||'',obs:obs||'',nome});
+    const r=await fetch(API,{method:'POST',body});const st=await r.json();aplicar(st);toast('salvo ✓');
+  }catch(e){toast('erro ao salvar, tenta de novo');}
+}
+function decidirFull(dec){if(!checkNome())return;apiSave('full','',dec,val('obs-full'));}
+function decidirCorte(id,dec){if(!checkNome())return;apiSave('corte',id,dec,val('obs-'+id));}
+function salvarObsFull(){apiSave('full','',(estado.full.decisao||''),val('obs-full'));}
+function salvarObsCorte(id){apiSave('corte',id,(estado.cortes[id]||{}).decisao||'',val('obs-'+id));}
+
+async function tick(){const st=await apiGet();if(st)aplicar(st);}
+$('nome').value=localStorage.getItem(KEY+'_nome')||'';
+$('nome').addEventListener('input',()=>localStorage.setItem(KEY+'_nome',getNome()));
+tick(); setInterval(tick,12000);
+</script>
+</body></html>
